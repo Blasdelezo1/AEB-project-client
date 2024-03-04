@@ -1,0 +1,30 @@
+.NavBar {
+    background-color: #f5f5dc;
+}
+
+.NavBar-icon {
+    width: 100px;
+    height: 100px;
+    margin-left: 40px;
+}
+
+.NavBar-icon:hover {
+    transform: scale(1.3);
+    transition: transform 0.5s ease;
+}
+
+.NavBar-navlink {
+    margin-right: 50px;
+    margin-top: 10px;
+    align-items: center;
+}
+
+.NavBar-navlink:hover {
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+}
+
+.NavBar-button {
+    margin-right: 20px;
+    align-items: center;
+}
