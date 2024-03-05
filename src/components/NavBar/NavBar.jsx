@@ -5,10 +5,13 @@ import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import Offcanvas from 'react-bootstrap/Offcanvas'
 import appIcon from './../../assets/AEB_FB.png'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
+import { AuthContext } from '../../Context/Auth.context'
+import { useContext } from 'react'
 
 
 function NavBar() {
+    const { user, isLoggedIn, logout } = useContext(AuthContext)
 
     return (
         <div className="NavBar">
@@ -50,9 +53,46 @@ function NavBar() {
                                     <Nav.Link href="/noticias" className='NavBar-navlink'>Noticias</Nav.Link>
                                     <Nav.Link href="/member" className='NavBar-navlink'>Members</Nav.Link>
                                 </Nav>
-                                <Button variant="outline-success" className="NavBar-button mt-3">Log In</Button>
-                                <Button variant="outline-primary" className="NavBar-button mt-3">Sign In</Button>
+                                {
+                                    isLoggedIn && (
+                                        <>
+                                            {/* <Link to='/api/auth/login'>
+                                                <Button
+                                                    variant="outline-success"
+                                                    className="NavBar-button mt-3">
+                                                    Log In
+                                                </Button>
+                                            </Link> */}
 
+                                            <Button
+                                                onClick={logout}
+                                                variant="dark"
+                                                className="NavBar-button mt-3">
+                                                Log Out
+                                            </Button>
+
+                                            <p>{user.name}</p>
+                                        </>
+                                    )
+
+                                }
+                                {
+                                    !isLoggedIn && (
+                                        <>
+                                            <Link to='/api/auth/login'>
+                                                <Button
+                                                    variant="outline-success"
+                                                    className="NavBar-button mt-3">
+                                                    Log In
+                                                </Button>
+                                            </Link>
+
+                                            <Link to='/api/auth/signup'>
+                                                <Button variant="outline-primary" className="NavBar-button mt-3">Sign In</Button>
+                                            </Link>
+                                        </>
+                                    )
+                                }
 
                             </Offcanvas.Body>
 

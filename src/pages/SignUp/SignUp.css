@@ -1,0 +1,21 @@
+.SignupPage {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.SignupPage-email {
+    max-width: 300px;
+}
+
+.SignupPage-name {
+    max-width: 300px;
+}
+
+.SignupPage-password {
+    max-width: 300px;
+}
+
+.SignupPage-button {
+    max-width: 300px;
+}
