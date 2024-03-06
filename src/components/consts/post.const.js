@@ -1,0 +1,1 @@
+export const BACKGAMMON_CATEGORIES = ['early game', 'midle game', 'late game', 'opening', 'prime', 'blitz', 'cube', 'timming', 'flexibility', 'backgamme', 'bear off']

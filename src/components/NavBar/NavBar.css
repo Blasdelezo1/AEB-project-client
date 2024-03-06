@@ -28,3 +28,15 @@
     margin-right: 20px;
     align-items: center;
 }
+
+.NavBar a,
+.offcanvas a {
+    text-decoration: none;
+    color: black;
+}
+
+.NavBar-modal-tile {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
