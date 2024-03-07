@@ -2,8 +2,7 @@
     width: 20%;
 }
 
-.check-container {
-    width: 133%;
-    align-items: center;
-
+.Submit-post {
+    display: flex;
+    justify-content: center;
 }

@@ -13,22 +13,21 @@ import { useContext, useState } from 'react'
 
 import LoginForm from '../LoginForm/LoginForm'
 
-import { useNavigate } from 'react-router-dom'
 import SignupForm from '../SignUpForm/SignUpForm'
 
 function NavBar() {
 
+    const [modalContent, setModalContent] = useState('login')
     const [showModal, setShowModal] = useState(false)
-    const [showModalSignUp, setShowModalSignUp] = useState(false)
+
     const { user, isLoggedIn, logout } = useContext(AuthContext)
 
     const handleClose = () => setShowModal(false)
-    const handleShow = () => setShowModal(true)
 
-    const handleCloseSignUp = () => setShowModalSignUp(false)
-    const handleShowSignUp = () => setShowModalSignUp(true)
-
-    const navigate = useNavigate()
+    const handleShow = (modalContent) => {
+        setModalContent(modalContent)
+        setShowModal(true)
+    }
 
     return (
         <div className="NavBar">
@@ -104,7 +103,7 @@ function NavBar() {
                                         <>
                                             <Link to='/api/auth/login'>
                                                 <Button
-                                                    onClick={handleShow}
+                                                    onClick={() => handleShow('login')}
                                                     variant="outline-success"
                                                     className="NavBar-button mt-3">
                                                     Log In
@@ -114,7 +113,7 @@ function NavBar() {
 
                                             <Link to='/api/auth/signup'>
                                                 <Button
-                                                    onClick={handleShowSignUp}
+                                                    onClick={() => handleShow('signup')}
                                                     variant="outline-primary"
                                                     className="NavBar-button mt-3">
                                                     Sign Up
@@ -135,19 +134,22 @@ function NavBar() {
 
             <Modal show={showModal} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title className="NavBar-modal-tile" >Inicio de Sesión</Modal.Title>
+                    <Modal.Title className="NavBar-modal-tile" >
+                        {
+                            modalContent === 'login' && 'Inicio de sesión'
+                        }
+                        {
+                            modalContent === 'signup' && 'Registro'
+                        }
+                    </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <LoginForm handleClose={handleClose} />
-                </Modal.Body>
-            </Modal>
-
-            <Modal show={showModalSignUp} onHide={handleCloseSignUp}>
-                <Modal.Header closeButton>
-                    <Modal.Title className="NavBar-modal-tile" >Registro</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <SignupForm handleCloseSignUp={handleCloseSignUp} />
+                    {
+                        modalContent === 'login' && <LoginForm handleClose={handleClose} />
+                    }
+                    {
+                        modalContent === 'signup' && <SignupForm handleClose={handleClose} />
+                    }
                 </Modal.Body>
             </Modal>
         </div>

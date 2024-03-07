@@ -8,7 +8,7 @@ import { Button, Row, Col } from 'react-bootstrap'
 const API_BASE_URL = "http://localhost:5005"
 
 
-const SignupPage = ({ handleCloseSignUp }) => {
+const SignupPage = ({ handleClose }) => {
 
     const navigate = useNavigate()
 
@@ -26,7 +26,7 @@ const SignupPage = ({ handleCloseSignUp }) => {
             .post(`${API_BASE_URL}/api/auth/signup`, newUser)
             .then(() => {
                 navigate(`/`)
-                handleCloseSignUp()
+                handleClose()
             }
             )
             .catch(err => console.log(err))
