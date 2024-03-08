@@ -2,11 +2,16 @@ import './LearnPage.css'
 import NewPostForm from '../../components/NewPostForm/newPostForm'
 import AllPostList from '../../components/AllPostList/AllPostList'
 import { Row, Container, Col, Button } from 'react-bootstrap'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const LearnPage = () => {
 
-    const [showPostForm, setShowPostForm] = useState(true)
+    const [showPostForm, setShowPostForm] = useState(false)
+
+    const handleShowPostForm = () => {
+
+        setShowPostForm(!showPostForm)
+    }
 
     return (
 
@@ -18,17 +23,19 @@ const LearnPage = () => {
 
                     <Col md={{ span: 8, offset: 2 }}>
 
-                        <h1>Aprende whatever</h1>
+                        <h1>Comparte tu Posicion</h1>
 
                         <hr className='mb-5' />
 
                         <AllPostList />
 
-                        {/* TODO: MOSTRAR FORMULARIO AHORA */}
-                        <Button variant={'dark'}>Crear nuevo post</Button>
+                        <Button
+                            variant={'dark'}
+                            onClick={handleShowPostForm}
+                        >
+                            Crear nuevo post</Button>
 
                         <hr className='mb-5' />
-
                         {
                             showPostForm && <NewPostForm />
                         }

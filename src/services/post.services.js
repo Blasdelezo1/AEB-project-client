@@ -25,9 +25,22 @@ class PostServices {
         return this.axiosApp.get(`/api/post/`)
     }
 
-    // savePost = postInfo => {
-    //     return this.axiosApp.post(`/api/post/`, postInfo)
-    // }
+    getPostById = (postId) => {
+        return this.axiosApp.get(`/api/post/${postId}`)
+    }
+
+    createPost = (newPost) => {
+
+        return this.axiosApp.post(`/api/post/`, newPost)
+    }
+
+    updatePost = (postId, updatedPost) => {
+        return this.axiosApp.put(`/api/post/${postId}`, updatedPost)
+    }
+
+    deletePost = (postId) => {
+        return this.axiosApp.delete(`/api/post/${postId}`)
+    }
 }
 
 export default new PostServices()

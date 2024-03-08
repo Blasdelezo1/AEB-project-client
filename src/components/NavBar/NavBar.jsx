@@ -17,12 +17,21 @@ import SignupForm from '../SignUpForm/SignUpForm'
 
 function NavBar() {
 
+
+
     const [modalContent, setModalContent] = useState('login')
     const [showModal, setShowModal] = useState(false)
+
+    const [showOfCanvas, setShowOfCanvas] = useState(false)
 
     const { user, isLoggedIn, logout } = useContext(AuthContext)
 
     const handleClose = () => setShowModal(false)
+
+    const handleOfCanvasClose = () => setShowOfCanvas(false)
+
+
+
 
     const handleShow = (modalContent) => {
         setModalContent(modalContent)
@@ -45,12 +54,18 @@ function NavBar() {
                             </Link>
                         </Navbar.Brand>
 
-                        <Navbar.Toggle aria-controls="offcanvasNavbar-expand-lg" />
+                        <Navbar.Toggle
+
+                            aria-controls="offcanvasNavbar-expand-lg"
+                            onClick={() => setShowOfCanvas(!showOfCanvas)}
+                        />
 
                         <Navbar.Offcanvas
                             id="offcanvasNavbar-expand-lg"
                             aria-labelledby="offcanvasNavbarLabel-expand-lg"
                             placement="end"
+                            show={showOfCanvas}
+                            onHide={handleOfCanvasClose}
                         >
 
                             <Offcanvas.Header closeButton>
@@ -62,7 +77,10 @@ function NavBar() {
                             <Offcanvas.Body>
 
                                 <Nav className="justify-content-center flex-grow-1 pe-3">
-                                    <Link to='/'>
+                                    <Link
+                                        to='/'
+                                        onClick={() => handleOfCanvasClose()}>
+
                                         <Nav.Link className='NavBar-navlink' as="span">Home</Nav.Link>
                                     </Link>
                                     <Link to='/aprende'>
@@ -88,13 +106,19 @@ function NavBar() {
                                     isLoggedIn && (
                                         <>
                                             <Button
-                                                onClick={logout}
+                                                onClick={() => {
+                                                    logout()
+                                                    handleOfCanvasClose()
+                                                }}
+
                                                 variant="dark"
                                                 className="NavBar-button mt-3">
                                                 Log Out
                                             </Button>
+                                            <p className='NavBar-profile'  >{user.name}</p>
 
-                                            <p className='NavBar-profile'>{user.name}</p>
+                                            {/* <img src={user.avatar} alt="efsf" /> */}
+
                                         </>
                                     )
                                 }
@@ -122,7 +146,6 @@ function NavBar() {
                                         </>
                                     )
                                 }
-
                             </Offcanvas.Body>
 
                         </Navbar.Offcanvas>

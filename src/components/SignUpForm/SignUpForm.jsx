@@ -4,6 +4,9 @@ import { Link, useNavigate } from "react-router-dom"
 import axios from "axios"
 import Form from 'react-bootstrap/Form'
 import { Button, Row, Col } from 'react-bootstrap'
+import uploadServices from '../../services/upload.services'
+
+uploadServices
 
 const API_BASE_URL = "http://localhost:5005"
 
@@ -12,11 +15,14 @@ const SignupPage = ({ handleClose }) => {
 
     const navigate = useNavigate()
 
+    const [isLoadingimage, setIsLoadingImage] = useState(false)
+
     const [newUser, setNewUser] = useState({
 
         name: '',
         email: '',
-        password: ''
+        password: '',
+        avatar: ''
     })
 
     const handleFormSubmit = (e) => {
@@ -41,6 +47,25 @@ const SignupPage = ({ handleClose }) => {
 
         })
 
+    }
+    const handleFileUpload = e => {
+
+        setIsLoadingImage(true)
+
+        const formData = new FormData()
+        formData.append('imageData', e.target.files[0])
+
+
+        uploadServices
+            .uploadimage(formData)
+            .then(res => {
+                setNewUser({ ...newPost, avatar: res.data.cloudinary_url })
+                setIsLoadingImage(false)
+            })
+            .catch(err => {
+                console.log(err)
+                setIsLoadingImage(false)
+            })
     }
 
     return (
@@ -78,10 +103,9 @@ const SignupPage = ({ handleClose }) => {
 
                     <Form.Group controlId='avatar' className='mb-3'>
                         <Form.Control
-                            type='text'
-                            placeholder="URL o png"
-                            onChange={handleInputChange}
-                            name={'password'}
+                            type='file'
+                            onChange={handleFileUpload}
+                            name={'avatar'}
                         />
                     </Form.Group>
 
@@ -89,8 +113,9 @@ const SignupPage = ({ handleClose }) => {
                         <Button
                             className='SignupPage-button'
                             type="submit"
-                            variant="outline-primary">
-                            Sign Up
+                            variant="outline-primary"
+                            disabled={isLoadingimage}>
+                            {isLoadingimage ? 'cargando imagen' : 'Sign Up'}
                         </Button>
                     </div>
                 </Col>

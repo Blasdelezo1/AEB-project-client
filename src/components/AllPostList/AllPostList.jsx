@@ -3,7 +3,7 @@ import { useState, useEffect } from "react"
 import postServices from '../../services/post.services'
 import { Row, Col } from 'react-bootstrap'
 
-
+import PostCard from './../../components/PostCard/PostCard'
 
 function AllPostList() {
 
@@ -27,11 +27,8 @@ function AllPostList() {
                 <Row>
                     {
                         post.map((post) => (
-                            <Col key={post.id}>
-                                <div>
-                                    <h1>{post.title}</h1>
-                                    <img src={post.imageUrl} alt="post image" />
-                                </div>
+                            <Col key={post._id} md={4}>
+                                <PostCard  {...post} />
                             </Col>
                         ))
                     }

@@ -1,15 +1,14 @@
 import './newPostForm.css'
 import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { Container, Button, Form, Row, Col, InputGroup } from "react-bootstrap"
-import axios from "axios"
+import { Button, Form, Row, Col } from "react-bootstrap"
+
 
 import { BACKGAMMON_CATEGORIES } from '../../consts/post.const'
 import { getCurrentCategories } from '../../utils/post.utils'
 import uploadServices from '../../services/upload.services'
 import { AuthContext } from '../../Context/Auth.context'
-
-const API_BASE_URL = "http://localhost:5005"
+import postServices from '../../services/post.services'
 
 
 function NewPostForm() {
@@ -18,9 +17,11 @@ function NewPostForm() {
 
     const { user } = useContext(AuthContext)
 
+    const [isLoadingimage, setIsLoadingImage] = useState(false)
+
     const [newPost, setNewPost] = useState({
         title: "",
-        imageUrl: "",
+        cover: "",
         description: "",
         owner: user?._id,
         categories: [],
@@ -31,10 +32,14 @@ function NewPostForm() {
 
         e.preventDefault()
 
-        // TODO: PASAR A SERVICIOS
-        axios
-            .post(`${API_BASE_URL}/api/post/`, newPost)
-            .then(() => navigate('/learn'))
+        if (!newPost.cover) {
+            console.log('Por favor, selecciona una imagen');
+            return;
+        }
+
+        postServices
+            .createPost(newPost)
+            .then(() => navigate('/aprende'))
             .catch(err => console.log(err))
     }
 
@@ -59,15 +64,22 @@ function NewPostForm() {
 
     const handleFileUpload = e => {
 
+        setIsLoadingImage(true)
+
         const formData = new FormData()
         formData.append('imageData', e.target.files[0])
+
 
         uploadServices
             .uploadimage(formData)
             .then(res => {
-                setNewPost({ ...newPost, imageUrl: res.data.cloudinary_url })
+                setNewPost({ ...newPost, cover: res.data.cloudinary_url })
+                setIsLoadingImage(false)
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err)
+                setIsLoadingImage(false)
+            })
     }
 
 
@@ -88,12 +100,12 @@ function NewPostForm() {
                 </Col>
                 <Col md={6}>
                     <Form.Label>Sube tu imagen</Form.Label>
-                    <Form.Group controlId='image' className='mb-3'>
+                    <Form.Group controlId='cover' className='mb-3'>
                         <Form.Control
                             type='file'
                             onChange={handleFileUpload}
-                            name={'image'}
-                            value={newPost.image}
+                            name={'cover'}
+                        // value={newPost.cover}
                         />
                     </Form.Group>
                 </Col>
@@ -134,6 +146,11 @@ function NewPostForm() {
                                 )
                             })
                         }
+                        <Row>
+                            <Col>
+                                <Form.Text>Selecciona 1 por lo menos</Form.Text>
+                            </Col>
+                        </Row>
                     </Form.Group>
                 </Col>
             </Row>
@@ -156,12 +173,14 @@ function NewPostForm() {
 
             <div className='Submit-post'>
                 <Button
+                    disabled={isLoadingimage}
                     className='Submit-post-button'
                     type="submit"
                     variant="outline-primary">
-                    Submit
+                    {isLoadingimage ? 'cargando imagen' : 'Submit'}
                 </Button>
             </div>
+            <hr className='mb-3' />
 
         </Form >
 
