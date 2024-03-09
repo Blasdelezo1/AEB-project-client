@@ -2,7 +2,7 @@ import './PostDetailsPage.css'
 import { useEffect, useState } from 'react'
 import { Link, useParams, useNavigate } from "react-router-dom"
 import postServices from '../../services/post.services'
-import { Col, Button, Container, Row, ListGroup } from "react-bootstrap"
+import { Col, Button, Container, Row, ListGroupItem } from "react-bootstrap"
 
 
 function PostDetailsPage() {
@@ -10,9 +10,9 @@ function PostDetailsPage() {
 
     const { postId } = useParams()
 
-    // const navigate = useNavigate() aqui seguramente no nos haga falta
+    const navigate = useNavigate()
 
-    const [PostDetails, setPostDetails] = useState({})
+    const [postDetails, setPostDetails] = useState({})
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
@@ -30,6 +30,14 @@ function PostDetailsPage() {
             })
     }
 
+    const deletePost = () => {
+
+        postServices
+            .deletePost(postId)
+            .then(() => navigate('/aprende'))
+            .catch(err => console.log(err))
+    }
+
     return (
         <>
             {isLoading ? (
@@ -40,74 +48,85 @@ function PostDetailsPage() {
                 <div className='PostDetailsPage'>
                     <Container>
                         <Row className='justify-content-center'>
-                            <Col className='text-center mb-5'>
-                                <h1>Informacion del POST!!</h1>
+                            <Col className='text-center mb-5' md={6} >
+                                <h1>Informacion del Post!!</h1>
+
                             </Col>
                         </Row>
-                        {PostDetails && (
+                        {postDetails && (
                             <>
+
+                                <Row className='justify-content-center mb-3'>
+                                    <Col md={{ span: 6 }} className='text-center'>
+                                        <h2>{postDetails.title}</h2>
+                                    </Col>
+                                </Row>
                                 <Row className='justify-content-center'>
                                     <Col md={{ span: 6 }} className='text-center'>
-                                        <img src={PostDetails.cover} alt="PostCover" style={{ maxWidth: '100%' }} />
+                                        <img src={postDetails.cover} alt="PostCover" />
                                     </Col>
                                 </Row>
                                 <Row className='justify-content-center mb-3'>
-                                    <Col md={{ span: 3 }} className='text-center'>
-                                        <h2>{PostDetails.title}</h2>
+                                    <Col md={{ span: 1 }} className='text-center mt-3'>
+                                        <h6 className="categoriesTitle">Categoria/s</h6>
+                                    </Col>
+                                    <Col md={{ span: 4 }}>
+                                        <div className='categoriesDetails mt-3'>
+
+                                            {
+                                                postDetails.categories && postDetails.categories?.map((category) => {
+                                                    return (
+                                                        <Button key={category} className='itemListCat' variant="outline-success">
+                                                            {category}
+                                                        </Button>
+                                                    )
+                                                })
+                                            }
+                                        </div>
+
                                     </Col>
                                 </Row>
-                                <Row className='justify-content-center mb-3'>
-                                    <Col md={{ span: 3 }} className='text-center'>
-                                        <h3 className="categoriesTitle">Categorias</h3>
-                                        <Col >
-                                            <ListGroup className='categoriesDetails'>
-                                                {
-                                                    <i>{PostDetails.categories}</i>
-                                                }
-                                            </ListGroup>
-                                        </Col>
-                                    </Col>
-                                </Row>
-                                <Row className='justify-content-center mt-5'>
-                                    <Col md={{ span: 6 }} >
-                                        <p>{PostDetails.description}</p>
+                                <Row className='justify-content-center mt-2'>
+                                    <Col md={{ span: 5 }} className='descriptionPost'>
+                                        <p >{postDetails.description}</p>
                                     </Col>
                                 </Row>
                             </>
                         )}
-                        <Row className='justify-content-center mt-5'>
+                        <Row className='justify-content-center mt-5 mb-5'>
 
                             <Col md={{ span: 6 }} className='text-center'>
                                 <Link to={"/aprende"}>
                                     <Button
-                                        variant="dark"
+                                        variant="outline-secondary"
                                         className='detail-page-buttons'>
                                         Atras
                                     </Button>
                                 </Link>
-
-                                <Link to={"/aprende"}>
-                                    <Button
-                                        variant="dark"
-                                        className='detail-page-buttons' >
-                                        Eliminar
-                                    </Button>
-                                </Link>
                                 <Link to={`/aprende/${postId}/edit`}>
                                     <Button
-                                        variant="dark"
+                                        variant="outline-dark"
                                         className='detail-page-buttons' >
                                         Editar
                                     </Button>
                                 </Link>
-                                <hr className='mb-3' />
+                                <Link to={`/aprende`}>
+                                    <Button
+                                        variant="outline-danger"
+                                        className='detail-page-buttons'
+                                        onClick={deletePost}>
+                                        Eliminar
+                                    </Button>
+                                </Link>
+
                             </Col>
                         </Row>
 
                         {/*TODO POSTFORUM */}
-                    </Container>
-                </div>
-            )}
+                    </Container >
+                </div >
+            )
+            }
         </>
 
 
@@ -116,6 +135,8 @@ function PostDetailsPage() {
 
 export default PostDetailsPage
 
+
+// <i>{PostDetails.categories}</i>
 //     <>
 // {
 //     isLoading?(

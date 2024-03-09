@@ -23,6 +23,9 @@ class userServices {
     login(loginData) {
         return this.axiosApp.post(`/api/auth/login`, loginData)
     }
+    addToFavorites(postId) {
+        return this.axiosApp.post(`/api/auth/favorites`, postId)
+    }
 }
 
 export default new userServices()

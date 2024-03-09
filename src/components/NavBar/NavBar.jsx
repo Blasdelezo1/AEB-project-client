@@ -19,7 +19,7 @@ function NavBar() {
 
 
 
-    const [modalContent, setModalContent] = useState('login')
+    const [modalContent, setModalContent] = useState()
     const [showModal, setShowModal] = useState(false)
 
     const [showOfCanvas, setShowOfCanvas] = useState(false)
@@ -83,22 +83,28 @@ function NavBar() {
 
                                         <Nav.Link className='NavBar-navlink' as="span">Home</Nav.Link>
                                     </Link>
-                                    <Link to='/aprende'>
+                                    <Link to='/aprende'
+                                        onClick={() => handleOfCanvasClose()}>
                                         <Nav.Link className='NavBar-navlink' as='span'>Aprende</Nav.Link>
                                     </Link>
-                                    <Link to='/torneos'>
+                                    <Link to='/torneos'
+                                        onClick={() => handleOfCanvasClose()}>
                                         <Nav.Link className='NavBar-navlink' as='span'>Torneos</Nav.Link>
                                     </Link>
-                                    <Link to='/liga'>
+                                    <Link to='/liga'
+                                        onClick={() => handleOfCanvasClose()}>
                                         <Nav.Link className='NavBar-navlink' as='span'>Liga</Nav.Link>
                                     </Link>
-                                    <Link to='/rankings'>
+                                    <Link to='/rankings'
+                                        onClick={() => handleOfCanvasClose()}>
                                         <Nav.Link className='NavBar-navlink' as='span'>Rankings</Nav.Link>
                                     </Link>
-                                    <Link to='/noticias'>
+                                    <Link to='/noticias'
+                                        onClick={() => handleOfCanvasClose()}>
                                         <Nav.Link className='NavBar-navlink' as='span'>Noticias</Nav.Link>
                                     </Link>
-                                    <Link to='/member' >
+                                    <Link to='/member'
+                                        onClick={() => handleOfCanvasClose()} >
                                         <Nav.Link className='NavBar-navlink' as='span'>Members</Nav.Link>
                                     </Link>
                                 </Nav>
@@ -115,34 +121,32 @@ function NavBar() {
                                                 className="NavBar-button mt-3">
                                                 Log Out
                                             </Button>
-                                            <p className='NavBar-profile'  >{user.name}</p>
-
-                                            {/* <img src={user.avatar} alt="efsf" /> */}
-
+                                            {/* <p className='NavBar-profile'>{user.name}</p> */}
+                                            <Link to='/profile'>
+                                                <img
+                                                    className='avatarImg'
+                                                    src={user.avatar}
+                                                    alt="efsf" />
+                                            </Link>
                                         </>
+
                                     )
                                 }
                                 {
                                     !isLoggedIn && (
                                         <>
-                                            <Link to='/api/auth/login'>
-                                                <Button
-                                                    onClick={() => handleShow('login')}
-                                                    variant="outline-success"
-                                                    className="NavBar-button mt-3">
-                                                    Log In
-                                                </Button>
-
-                                            </Link>
-
-                                            <Link to='/api/auth/signup'>
-                                                <Button
-                                                    onClick={() => handleShow('signup')}
-                                                    variant="outline-primary"
-                                                    className="NavBar-button mt-3">
-                                                    Sign Up
-                                                </Button>
-                                            </Link>
+                                            <Button
+                                                onClick={() => handleShow('login')}
+                                                variant="outline-success"
+                                                className="NavBar-button mt-3">
+                                                Log In
+                                            </Button>
+                                            <Button
+                                                onClick={() => handleShow('signup')}
+                                                variant="outline-primary"
+                                                className="NavBar-button mt-3">
+                                                Sign Up
+                                            </Button>
                                         </>
                                     )
                                 }
@@ -156,7 +160,7 @@ function NavBar() {
             </>
 
             <Modal show={showModal} onHide={handleClose}>
-                <Modal.Header closeButton>
+                <Modal.Header closeButton className='SignUpheader'>
                     <Modal.Title className="NavBar-modal-tile" >
                         {
                             modalContent === 'login' && 'Inicio de sesión'
@@ -168,10 +172,12 @@ function NavBar() {
                 </Modal.Header>
                 <Modal.Body>
                     {
-                        modalContent === 'login' && <LoginForm handleClose={handleClose} />
+                        modalContent === 'login' &&
+                        <LoginForm handleClose={handleClose} handleShow={handleShow} />
                     }
                     {
-                        modalContent === 'signup' && <SignupForm handleClose={handleClose} />
+                        modalContent === 'signup' &&
+                        <SignupForm handleClose={handleClose} />
                     }
                 </Modal.Body>
             </Modal>

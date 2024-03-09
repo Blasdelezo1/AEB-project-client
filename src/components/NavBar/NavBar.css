@@ -8,6 +8,12 @@
     margin-left: 40px;
 }
 
+.avatarImg {
+    width: 50px;
+    height: 50px;
+    margin-top: 10px;
+}
+
 .NavBar-icon:hover {
     transform: scale(1.3);
     transition: transform 0.5s ease;
@@ -37,6 +43,5 @@
 
 .NavBar-modal-tile {
     text-align: center;
-    display: flex;
-    justify-content: center;
+    margin-left: 175px;
 }

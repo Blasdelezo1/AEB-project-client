@@ -11,7 +11,8 @@ import { AuthContext } from '../../Context/Auth.context'
 import postServices from '../../services/post.services'
 
 
-function NewPostForm() {
+
+function NewPostForm({ handleClose }) {
 
     const navigate = useNavigate()
 
@@ -23,7 +24,7 @@ function NewPostForm() {
         title: "",
         cover: "",
         description: "",
-        owner: user?._id,
+        owner: user?.name,
         categories: [],
         moneyGame: 'false'
     })
@@ -39,7 +40,10 @@ function NewPostForm() {
 
         postServices
             .createPost(newPost)
-            .then(() => navigate('/aprende'))
+            .then(() => {
+                navigate('/aprende')
+                handleClose()
+            })
             .catch(err => console.log(err))
     }
 
@@ -173,6 +177,7 @@ function NewPostForm() {
 
             <div className='Submit-post'>
                 <Button
+                    onClick={() => handleClose()}
                     disabled={isLoadingimage}
                     className='Submit-post-button'
                     type="submit"

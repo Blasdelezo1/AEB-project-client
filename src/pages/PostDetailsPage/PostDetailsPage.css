@@ -5,3 +5,23 @@
 .categoriesDetails {
     margin-right: 5px;
 }
+
+.categoriesDetails i {
+    color: green;
+    padding: 10px;
+    margin-right: 10px;
+
+}
+
+.descriptionPost {
+    font-size: 0.9em;
+
+}
+
+.categoriesTitle {
+    font-weight: bold;
+}
+
+.itemListCat {
+    margin-right: 5px;
+}

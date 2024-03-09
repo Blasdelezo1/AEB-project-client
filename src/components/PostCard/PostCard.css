@@ -1,0 +1,53 @@
+.titleCard {
+    text-align: center;
+    font-weight: bold;
+}
+
+.infoPostCard {
+    background-color: #f5f7fa;
+}
+
+.PostCardLink {
+    text-decoration: none;
+}
+
+.PostCard {
+    background-color: #f5f7fa;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.imgPost {
+    height: 300px;
+}
+
+.postHeader {
+
+    margin-left: 9px;
+    padding-top: 10px;
+    align-items: center;
+    height: 70px;
+}
+
+/* .heartLogo:hover {
+    color: #f44336;
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+} */
+
+/* .heartLogo {
+    background-color: red;
+} */
+
+.heartLogo:hover {
+    color: #f44336;
+}
+
+.avatarPost {
+    height: 30px;
+    width: 30px;
+    margin-left: 10px;
+}
+
+.shareLogo:hover {
+    color: #0d47a1;
+}

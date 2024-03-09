@@ -59,7 +59,7 @@ const SignupPage = ({ handleClose }) => {
         uploadServices
             .uploadimage(formData)
             .then(res => {
-                setNewUser({ ...newPost, avatar: res.data.cloudinary_url })
+                setNewUser({ ...newUser, avatar: res.data.cloudinary_url })
                 setIsLoadingImage(false)
             })
             .catch(err => {
@@ -75,6 +75,7 @@ const SignupPage = ({ handleClose }) => {
             <Row>
                 <Col md={{ span: 10, offset: 1 }}>
                     <Form.Group controlId='email' className='mb-3'>
+                        <Form.Label>Correo electrónico</Form.Label>
                         <Form.Control
                             type='text'
                             placeholder="Introduzca su correo electronico"
@@ -84,6 +85,7 @@ const SignupPage = ({ handleClose }) => {
                     </Form.Group>
 
                     <Form.Group controlId='name' className='mb-3'>
+                        <Form.Label>Nombre</Form.Label>
                         <Form.Control
                             type='text'
                             placeholder="Introduzca su nombre"
@@ -93,6 +95,7 @@ const SignupPage = ({ handleClose }) => {
                     </Form.Group>
 
                     <Form.Group controlId='password' className='mb-3'>
+                        <Form.Label>Contraseña</Form.Label>
                         <Form.Control
                             type='password'
                             placeholder="Introduzca su contraseña"
@@ -102,6 +105,7 @@ const SignupPage = ({ handleClose }) => {
                     </Form.Group>
 
                     <Form.Group controlId='avatar' className='mb-3'>
+                        <Form.Label>Avatar</Form.Label>
                         <Form.Control
                             type='file'
                             onChange={handleFileUpload}

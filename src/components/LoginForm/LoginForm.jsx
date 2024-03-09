@@ -1,13 +1,12 @@
 import './LoginForm.css'
 import { useContext, useState } from "react"
-import axios from "axios"
 import { Link, useNavigate } from "react-router-dom"
 import { AuthContext } from '../../Context/Auth.context'
 import { Container, Button, Col, Form, ButtonGroup, Row } from 'react-bootstrap'
 import userServices from '../../services/user.services'
 
 
-function LoginPage({ handleClose }) {
+function LoginPage({ handleClose, handleShow }) {
 
     const navigate = useNavigate()
 
@@ -56,17 +55,17 @@ function LoginPage({ handleClose }) {
                 <Col md={{ span: 10, offset: 1 }}>
 
                     <Form.Group controlId='email' className='mb-3'>
+                        <Form.Label>Correo electrónico</Form.Label>
                         <Form.Control
-                            placeholder="Correo electrónico"
                             name='email'
                             onChange={handleInputChange}
                         />
                     </Form.Group>
 
                     <Form.Group controlId='password' className='mb-3'>
+                        <Form.Label>Contraseña</Form.Label>
                         <Form.Control
                             type='password'
-                            placeholder="Contraseña"
                             name='password'
                             onChange={handleInputChange}
                         />
@@ -74,9 +73,12 @@ function LoginPage({ handleClose }) {
 
                     <div className="login-buttons">
                         <Button type='submit' variant="outline-success">Login</Button>
-                        <Link to='/api/auth/signup'>
-                            <Button variant="outline-primary">Sign Up</Button>
-                        </Link>
+
+                        <Button
+                            variant="outline-primary"
+                            onClick={() => handleShow('signup')}
+                        >Sign Up</Button>
+
 
                     </div>
                 </Col>

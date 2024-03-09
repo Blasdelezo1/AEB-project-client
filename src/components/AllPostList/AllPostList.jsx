@@ -27,7 +27,7 @@ function AllPostList() {
                 <Row>
                     {
                         post.map((post) => (
-                            <Col key={post._id} md={4}>
+                            <Col key={post._id} md={6} className='mb-3'>
                                 <PostCard  {...post} />
                             </Col>
                         ))
