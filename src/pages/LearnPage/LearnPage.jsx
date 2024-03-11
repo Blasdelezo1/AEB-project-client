@@ -25,9 +25,9 @@ const LearnPage = () => {
 
                 <Row>
 
-                    <Col md={{ span: 8, offset: 2 }}>
+                    <Col md={{ span: 10, offset: 1 }}>
 
-                        <h1 className='headerLearn'>Comparte tu Posicion</h1>
+                        <h1 className='headerLearn'>Listado de Posiciones</h1>
 
                         <hr className='mb-5' />
 

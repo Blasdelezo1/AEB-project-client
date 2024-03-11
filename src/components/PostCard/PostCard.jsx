@@ -8,14 +8,14 @@ import { faClock, faShareAlt, faHeart } from '@fortawesome/free-solid-svg-icons'
 
 import userServices from './../../services/user.services'
 
-function PostCard({ _id, cover, title, createdAt }) {
+function PostCard({ _id, cover, title, createdAt, categories }) {
 
     const { user } = useContext(AuthContext)
 
     const formatDate = (dateString) => {
-        const options = { year: 'numeric', month: 'long', day: 'numeric' }
-        const date = new Date(dateString)
-        return date.toLocaleDateString('es-ES', options)
+        const date = new Date(dateString);
+        const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+        return formattedDate;
     }
 
     const handleAddToFavorites = () => {

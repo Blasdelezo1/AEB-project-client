@@ -1,13 +1,14 @@
 import './PostDetailsPage.css'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { Link, useParams, useNavigate } from "react-router-dom"
 import postServices from '../../services/post.services'
 import { Col, Button, Container, Row, ListGroupItem } from "react-bootstrap"
-
+import { AuthContext } from '../../Context/Auth.context'
+import ResponseForm from '../../components/ResponseForm/ResponseForm'
 
 function PostDetailsPage() {
 
-
+    const { user } = useContext(AuthContext)
     const { postId } = useParams()
 
     const navigate = useNavigate()
@@ -38,6 +39,11 @@ function PostDetailsPage() {
             .catch(err => console.log(err))
     }
 
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+        return formattedDate;
+    }
     return (
         <>
             {isLoading ? (
@@ -55,47 +61,52 @@ function PostDetailsPage() {
                         </Row>
                         {postDetails && (
                             <>
-
-                                <Row className='justify-content-center mb-3'>
-                                    <Col md={{ span: 6 }} className='text-center'>
-                                        <h2>{postDetails.title}</h2>
+                                <Row className='justify-content-center'>
+                                    <Col md={6} className='TitleDetailspage text-center'>
+                                        <h1>{postDetails.title}</h1>
                                     </Col>
                                 </Row>
                                 <Row className='justify-content-center'>
-                                    <Col md={{ span: 6 }} className='text-center'>
-                                        <img src={postDetails.cover} alt="PostCover" />
+                                    <Col md={6} className='text-center mb-3 mt-3'>
+                                        <img src={postDetails.cover} alt="PostCover" className='img-fluid' />
                                     </Col>
                                 </Row>
-                                <Row className='justify-content-center mb-3'>
-                                    <Col md={{ span: 1 }} className='text-center mt-3'>
-                                        <h6 className="categoriesTitle">Categoria/s</h6>
-                                    </Col>
-                                    <Col md={{ span: 4 }}>
-                                        <div className='categoriesDetails mt-3'>
-
-                                            {
-                                                postDetails.categories && postDetails.categories?.map((category) => {
-                                                    return (
-                                                        <Button key={category} className='itemListCat' variant="outline-success">
-                                                            {category}
-                                                        </Button>
-                                                    )
-                                                })
-                                            }
+                                <Row className='justify-content-center'>
+                                    <Col md={3} className='userDataColumnDetails mb-1 mt-1' >
+                                        <div className='text-center'>
+                                            {user && user.avatar && <img className='avatarPost' src={user.avatar} alt="Avatar" />}
+                                            <p>{user.name}</p>
+                                            <p>{formatDate(postDetails.createdAt)}</p>
                                         </div>
-
+                                    </Col>
+                                    <Col md={3} className='userDataColumnDetails mb-1 mt-1'>
+                                        <div className='text-center'>
+                                            <h6 className="categoriesTitle mb-3">Categoría/s</h6>
+                                            <div className='categoriesDetails mb-3'>
+                                                {postDetails.categories && postDetails.categories.map((category, index) => (
+                                                    <Button key={index} className='itemListCat' variant="outline-success">
+                                                        {category}
+                                                    </Button>
+                                                ))}
+                                            </div>
+                                        </div>
                                     </Col>
                                 </Row>
-                                <Row className='justify-content-center mt-2'>
-                                    <Col md={{ span: 5 }} className='descriptionPost'>
-                                        <p >{postDetails.description}</p>
+                                <Row className='justify-content-center'>
+                                    <Col md={6} className='userDataColumnDetails text-center mt-2'>
+                                        <p>{postDetails.description}</p>
                                     </Col>
                                 </Row>
                             </>
                         )}
-                        <Row className='justify-content-center mt-5 mb-5'>
+                        <Row className='justify-content-center mt-3'>
+                            <Col md={6} >
+                                <ResponseForm />
+                            </Col>
+                        </Row>
+                        <Row>
 
-                            <Col md={{ span: 6 }} className='text-center'>
+                            <Col className='text-center mb-5 mt-5'>
                                 <Link to={"/aprende"}>
                                     <Button
                                         variant="outline-secondary"
@@ -122,7 +133,7 @@ function PostDetailsPage() {
                             </Col>
                         </Row>
 
-                        {/*TODO POSTFORUM */}
+
                     </Container >
                 </div >
             )
@@ -134,6 +145,78 @@ function PostDetailsPage() {
 }
 
 export default PostDetailsPage
+
+
+
+// {
+//     postDetails && (
+//         <>
+
+//             <Row md={{ span: 10, offset: 1 }} className='justify-content-center'>
+//                 <Col >
+//                     <h2>{postDetails.title}</h2>
+//                 </Col>
+//             </Row>
+//             <Row>
+//                 <Col>
+//                     <img src={postDetails.cover} alt="PostCover" />
+//                 </Col>
+//             </Row>
+//             <Row >
+//                 <Col>
+//                     {
+//                         user && user.avatar && <img
+//                             className='avatarPost'
+//                             src={user.avatar}
+//                             alt="Avatar" />
+//                     }
+//                     {user.name}
+
+//                     {formatDate(postDetails.createdAt)}
+//                 </Col>
+
+
+//                 {/* <Row className='justify-content-end mb-3'> */}
+//                 <Col>
+//                     <h6 className="categoriesTitle">Categoria/s</h6>
+
+//                     <div className='categoriesDetails mt-3'>
+
+//                         {
+//                             postDetails.categories && postDetails.categories?.map((category) => {
+//                                 return (
+//                                     <Button key={category} className='itemListCat' variant="outline-success">
+//                                         {category}
+//                                     </Button>
+//                                 )
+//                             })
+//                         }
+//                     </div>
+
+//                 </Col>
+//             </Row>
+//             <Row>
+//                 <Col>
+//                     <p >{postDetails.description}</p>
+//                 </Col>
+//             </Row>
+//         </>
+//     )
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // <i>{PostDetails.categories}</i>
