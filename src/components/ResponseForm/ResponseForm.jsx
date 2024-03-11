@@ -4,18 +4,21 @@ import { AuthContext } from '../../Context/Auth.context'
 import resposeServices from '../../services/respose.services'
 import { useEffect, useState, useContext } from 'react'
 
-function ResponseForm() {
+function ResponseForm({ _id, loadPostDetails }) {
 
     // const navigate = useNavigate()
 
     const { user } = useContext(AuthContext)
 
+
     const [newResponse, setNewResponse] = useState({
 
-        coment: "",
-        owner: user?.name,
-        post: ''
+        comment: "",
+        owner: user?._id,
+        post: _id
     })
+
+
 
     const handleFormSubmit = e => {
 
@@ -24,7 +27,7 @@ function ResponseForm() {
         resposeServices
             .createResponse(newResponse)
             .then(() => {
-
+                loadPostDetails()
             })
             .catch(err => console.log(err))
     }
@@ -35,16 +38,17 @@ function ResponseForm() {
 
 
     return <div className='ResponseForm'>
-        <h1>Comentarios</h1>
+        <h3>Comenta</h3>
         <hr className='mb-2' />
         <Form onSubmit={handleFormSubmit}>
-            <Form.Group className="ResponseForm-coment mb-3" controlId="coment">
-                <Form.Label>Comentarios</Form.Label>
+            <Form.Group className="ResponseForm-comment mb-3" controlId="comment">
+                <Form.Label>Deja tu comentario</Form.Label>
                 <Form.Control
-                    name={'coment'}
+                    name={'comment'}
                     onChange={handleInputChange}
                     as="textarea"
                     rows={3}
+                    value={newResponse.comment}
 
                 />
             </Form.Group>

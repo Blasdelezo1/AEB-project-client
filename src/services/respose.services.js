@@ -24,6 +24,11 @@ class ResponseServices {
     createResponse = (newResponse) => {
         return this.axiosApp.post(`/api/response/`, newResponse)
     }
+
+    getAllResponses = () => {
+        return this.axiosApp.get(`/api/response/`)
+    }
+
     deleteResponse = (responseId) => {
         return this.axiosApp.delete(`/api/response/${responseId}`)
     }

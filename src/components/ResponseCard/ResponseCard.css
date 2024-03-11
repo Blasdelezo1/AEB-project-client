@@ -1,0 +1,15 @@
+.ResponseCard {
+    font-size: .9em;
+    padding: 10px;
+}
+
+.ownerRespose {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.avatarResponse {
+    width: 100%;
+    border-radius: 50%;
+}

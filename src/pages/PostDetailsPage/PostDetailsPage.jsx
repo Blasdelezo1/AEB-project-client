@@ -5,6 +5,10 @@ import postServices from '../../services/post.services'
 import { Col, Button, Container, Row, ListGroupItem } from "react-bootstrap"
 import { AuthContext } from '../../Context/Auth.context'
 import ResponseForm from '../../components/ResponseForm/ResponseForm'
+import ResponseList from '../../components/ResponsesFromPost/ResponsesFromPost'
+
+
+
 
 function PostDetailsPage() {
 
@@ -101,9 +105,15 @@ function PostDetailsPage() {
                         )}
                         <Row className='justify-content-center mt-3'>
                             <Col md={6} >
-                                <ResponseForm />
+                                <ResponseForm _id={postId} />
                             </Col>
                         </Row>
+                        <Row className='justify-content-center mt-3'>
+                            <Col md={6} >
+                                <ResponseList getResponses={loadPostDetails} />
+                            </Col>
+                        </Row>
+
                         <Row>
 
                             <Col className='text-center mb-5 mt-5'>

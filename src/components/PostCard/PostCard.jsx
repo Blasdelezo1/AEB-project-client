@@ -8,7 +8,7 @@ import { faClock, faShareAlt, faHeart } from '@fortawesome/free-solid-svg-icons'
 
 import userServices from './../../services/user.services'
 
-function PostCard({ _id, cover, title, createdAt, categories }) {
+function PostCard({ _id, cover, title, createdAt, categories, owner }) {
 
     const { user } = useContext(AuthContext)
 
@@ -21,7 +21,8 @@ function PostCard({ _id, cover, title, createdAt, categories }) {
     const handleAddToFavorites = () => {
 
         userServices
-            .addToFavorites(_id)
+            .addToFavorites(user._id)
+        // FALTA EL THEN Y EL CATCH
     }
 
 
@@ -33,7 +34,7 @@ function PostCard({ _id, cover, title, createdAt, categories }) {
                         icon={faClock}
                         className="me-2" />
                     {formatDate(createdAt)}
-                    {user && user.avatar && <img className='avatarPost' src={user.avatar} alt="Avatar" />}
+                    {owner && owner.avatar && <img className='avatarPost' src={owner.avatar} alt="Avatar" />}
                 </div>
                 <div className='imgContainerPost'>
                     <Card.Img

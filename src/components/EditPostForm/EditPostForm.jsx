@@ -18,7 +18,8 @@ function EditPostForm() {
         description: '',
         categories: [],
         moneyGame: '',
-        owner: user?._id
+        owner: user?._id,
+
     })
 
     const { postId } = useParams()

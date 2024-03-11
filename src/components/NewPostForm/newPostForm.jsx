@@ -24,7 +24,7 @@ function NewPostForm({ handleClose }) {
         title: "",
         cover: "",
         description: "",
-        owner: user?.name,
+        owner: user?._id,
         categories: [],
         moneyGame: 'false'
     })
