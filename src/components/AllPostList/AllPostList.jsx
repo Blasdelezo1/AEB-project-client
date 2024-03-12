@@ -2,31 +2,16 @@ import './AllPostList.css'
 import { useState, useEffect } from "react"
 import postServices from '../../services/post.services'
 import { Row, Col } from 'react-bootstrap'
-
 import PostCard from './../../components/PostCard/PostCard'
 
-function AllPostList() {
-
-    const [post, setPost] = useState([])
-
-    useEffect(() => {
-        getAllPosts()
-    }, [])
-
-    const getAllPosts = () => {
-        postServices
-            .getAllPosts()
-            .then((response) => setPost(response.data))
-            .catch((error) => console.log(error))
-    }
-
+function AllPostList({ posts }) {
 
     return (
         <>
             <div className="AllPostList">
                 <Row>
                     {
-                        post.map((post) => (
+                        posts.map((post) => (
                             <Col key={post._id} md={6} className='mb-3'>
                                 <PostCard  {...post} />
                             </Col>

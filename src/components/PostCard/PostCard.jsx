@@ -35,6 +35,7 @@ function PostCard({ _id, cover, title, createdAt, categories, owner }) {
                         className="me-2" />
                     {formatDate(createdAt)}
                     {owner && owner.avatar && <img className='avatarPost' src={owner.avatar} alt="Avatar" />}
+                    <p className='categoriesCard'> {`Categorias | ${categories}`}</p>
                 </div>
                 <div className='imgContainerPost'>
                     <Card.Img

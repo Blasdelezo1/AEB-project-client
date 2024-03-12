@@ -12,9 +12,7 @@ import postServices from '../../services/post.services'
 
 
 
-function NewPostForm({ handleClose }) {
-
-    const navigate = useNavigate()
+function NewPostForm({ handleClose, refreshPosts }) {
 
     const { user } = useContext(AuthContext)
 
@@ -41,7 +39,7 @@ function NewPostForm({ handleClose }) {
         postServices
             .createPost(newPost)
             .then(() => {
-                navigate('/aprende')
+                refreshPosts()
                 handleClose()
             })
             .catch(err => console.log(err))

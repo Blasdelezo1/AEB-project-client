@@ -1,5 +1,7 @@
 .NavBar {
     background-color: #f5f5dc;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 .NavBar-icon {
@@ -9,7 +11,7 @@
 }
 
 .avatarImg {
-    width: 50px;
+    width: 100%;
     height: 50px;
     margin-top: 10px;
     border-radius: 40px;

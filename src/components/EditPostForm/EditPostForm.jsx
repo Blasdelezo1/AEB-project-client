@@ -6,6 +6,7 @@ import postServices from '../../services/post.services'
 import { getCurrentCategories } from '../../utils/post.utils'
 import { Form, Row, Col, Button } from 'react-bootstrap'
 import { BACKGAMMON_CATEGORIES } from '../../consts/post.const'
+import UploadServices from './../../services/upload.services'
 
 
 function EditPostForm() {
@@ -32,9 +33,7 @@ function EditPostForm() {
 
         postServices
             .getPostById(postId)
-            .then(({ data }) => {
-                setPostDataToEdit(data)
-            })
+            .then(({ data }) => setPostDataToEdit(data))
             .catch((error) => console.log(error))
     }
 
@@ -46,7 +45,7 @@ function EditPostForm() {
             .updatePost(postId, postDataToEdit)
             .then(() => {
                 loadPostDetails()
-                navigate(`/api/post/${postId}`);
+                navigate(`/aprende/${postId}`);
             })
             .catch((error) => console.log(error))
     }
@@ -69,10 +68,10 @@ function EditPostForm() {
         const formData = new FormData()
         formData.append('imageData', e.target.files[0])
 
-        uploadServices
+        UploadServices
             .uploadimage(formData)
             .then(res => {
-                setNewPost({ ...newPost, cover: res.data.cloudinary_url })
+                setPostDataToEdit({ ...postDataToEdit, cover: res.data.cloudinary_url })
             })
             .catch(err => console.log(err))
     }
@@ -104,7 +103,7 @@ function EditPostForm() {
                                 type='file'
                                 onChange={handleFileUpload}
                                 name={'cover'}
-                            // value={newPost.cover}
+                            // value={postDataToEdit.cover}
                             />
                         </Form.Group>
                     </Col>

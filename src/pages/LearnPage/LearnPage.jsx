@@ -3,18 +3,32 @@ import NewPostForm from '../../components/NewPostForm/newPostForm'
 import AllPostList from '../../components/AllPostList/AllPostList'
 import { Row, Container, Col, Button, Modal } from 'react-bootstrap'
 import { useEffect, useState } from 'react'
+import postServices from '../../services/post.services'
 
 
 const LearnPage = () => {
 
-    // const [showPostForm, setShowPostForm] = useState(false)
-
-    // const handleShowPostForm = () => { setShowPostForm(!showPostForm) }
 
     const [showModal, setShowModal] = useState(false)
+    const [posts, setPosts] = useState([])
 
     const handleClose = () => setShowModal(false);
     const handleShow = () => setShowModal(true);
+
+
+    useEffect(() => {
+        loadPostDetails()
+    }, [])
+
+    const loadPostDetails = () => {
+        postServices
+            .getAllPosts()
+            .then(({ data }) => {
+                setPosts(data)
+
+            })
+            .catch((error) => console.log(error))
+    }
 
 
     return (
@@ -31,7 +45,7 @@ const LearnPage = () => {
 
                         <hr className='mb-5' />
 
-                        <AllPostList />
+                        <AllPostList posts={posts} />
 
                         <Button
                             variant={'dark'}
@@ -40,9 +54,6 @@ const LearnPage = () => {
                             Comparte una Posicion</Button>
 
                         <hr className='mb-5' />
-                        {/* {
-                            showPostForm && <NewPostForm />
-                        } */}
 
                     </Col>
 
@@ -58,7 +69,7 @@ const LearnPage = () => {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <NewPostForm handleClose={handleClose} />
+                    <NewPostForm handleClose={handleClose} refreshPosts={loadPostDetails} />
                 </Modal.Body>
             </Modal>
 

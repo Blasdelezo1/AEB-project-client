@@ -29,9 +29,19 @@ class ResponseServices {
         return this.axiosApp.get(`/api/response/`)
     }
 
+    getResponseById = (responseId) => {
+        return this.axiosApp.get(`/api/response/${responseId}`)
+    }
+
+    getAllResponsesFromPost = postId => {
+        return this.axiosApp.get(`/api/response/post/${postId}`)
+    }
+
     deleteResponse = (responseId) => {
         return this.axiosApp.delete(`/api/response/${responseId}`)
     }
+
+
     updateResponse = (responseId, updatedResponse) => {
         return this.axiosApp.put(`/api/response/${responseId}`, updatedResponse)
     }

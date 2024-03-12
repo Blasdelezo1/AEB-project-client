@@ -2,10 +2,11 @@ import './PostDetailsPage.css'
 import { useEffect, useState, useContext } from 'react'
 import { Link, useParams, useNavigate } from "react-router-dom"
 import postServices from '../../services/post.services'
+import resposeServices from '../../services/respose.services'
 import { Col, Button, Container, Row, ListGroupItem } from "react-bootstrap"
 import { AuthContext } from '../../Context/Auth.context'
 import ResponseForm from '../../components/ResponseForm/ResponseForm'
-import ResponseList from '../../components/ResponsesFromPost/ResponsesFromPost'
+import ResponsePostList from '../../components/ResponsesFromPost/ResponsesFromPost'
 
 
 
@@ -18,22 +19,33 @@ function PostDetailsPage() {
     const navigate = useNavigate()
 
     const [postDetails, setPostDetails] = useState({})
+    const [responses, setResponses] = useState([])
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         loadPostDetails()
-
+        loadResponsesFromPost()
     }, [])
 
     const loadPostDetails = () => {
         postServices
             .getPostById(postId)
-            .then((response) => {
-                const eachPost = response.data
-                setPostDetails(eachPost)
+            .then(({ data }) => {
+                setPostDetails(data)
                 setIsLoading(false)
             })
     }
+
+
+    const loadResponsesFromPost = () => {
+        resposeServices
+            .getAllResponsesFromPost(postId)
+            .then(({ data }) => {
+                setResponses(data)
+            })
+            .catch((error) => console.log(error))
+    }
+
 
     const deletePost = () => {
 
@@ -42,6 +54,15 @@ function PostDetailsPage() {
             .then(() => navigate('/aprende'))
             .catch(err => console.log(err))
     }
+
+    const deleteResponse = (responseId) => {
+        resposeServices
+            .deleteResponse(responseId)
+            .then(() => loadResponsesFromPost())
+            .catch(err => console.log(err))
+    }
+
+
 
     const formatDate = (dateString) => {
         const date = new Date(dateString);
@@ -78,14 +99,16 @@ function PostDetailsPage() {
                                 <Row className='justify-content-center'>
                                     <Col md={3} className='userDataColumnDetails mb-1 mt-1' >
                                         <div className='text-center'>
-                                            {user && user.avatar && <img className='avatarPost' src={user.avatar} alt="Avatar" />}
-                                            <p>{user.name}</p>
+                                            {postDetails.owner && postDetails.owner.avatar && <img className='avatarPost' src={postDetails.owner.avatar} alt="OwnerAvatar" />}
+                                            <hr />
+                                            <p>{postDetails.owner?.name}</p>
                                             <p>{formatDate(postDetails.createdAt)}</p>
                                         </div>
                                     </Col>
                                     <Col md={3} className='userDataColumnDetails mb-1 mt-1'>
                                         <div className='text-center'>
                                             <h6 className="categoriesTitle mb-3">Categoría/s</h6>
+                                            <hr />
                                             <div className='categoriesDetails mb-3'>
                                                 {postDetails.categories && postDetails.categories.map((category, index) => (
                                                     <Button key={index} className='itemListCat' variant="outline-success">
@@ -96,26 +119,25 @@ function PostDetailsPage() {
                                         </div>
                                     </Col>
                                 </Row>
-                                <Row className='justify-content-center'>
+                                <Row className='DescriptionContainer justify-content-center'>
                                     <Col md={6} className='userDataColumnDetails text-center mt-2'>
-                                        <p>{postDetails.description}</p>
+                                        <p style={{ wordWrap: 'break-word', maxWidth: '100%' }}>{postDetails.description}</p>
                                     </Col>
                                 </Row>
                             </>
                         )}
                         <Row className='justify-content-center mt-3'>
                             <Col md={6} >
-                                <ResponseForm _id={postId} />
+                                <ResponseForm postId={postId} loadResponsesFromPost={loadResponsesFromPost} />
                             </Col>
                         </Row>
                         <Row className='justify-content-center mt-3'>
                             <Col md={6} >
-                                <ResponseList getResponses={loadPostDetails} />
+                                <ResponsePostList responses={responses} deleteResponse={deleteResponse} />
                             </Col>
                         </Row>
 
                         <Row>
-
                             <Col className='text-center mb-5 mt-5'>
                                 <Link to={"/aprende"}>
                                     <Button
@@ -128,7 +150,7 @@ function PostDetailsPage() {
                                     <Button
                                         variant="outline-dark"
                                         className='detail-page-buttons' >
-                                        Editar
+                                        Editar Post
                                     </Button>
                                 </Link>
                                 <Link to={`/aprende`}>
@@ -136,7 +158,7 @@ function PostDetailsPage() {
                                         variant="outline-danger"
                                         className='detail-page-buttons'
                                         onClick={deletePost}>
-                                        Eliminar
+                                        Eliminar Post
                                     </Button>
                                 </Link>
 

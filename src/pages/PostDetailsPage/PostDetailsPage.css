@@ -2,17 +2,6 @@
     margin-right: 30px;
 }
 
-.categoriesDetails {
-    margin-right: 5px;
-}
-
-.categoriesDetails i {
-    color: green;
-    padding: 10px;
-    margin-right: 10px;
-
-}
-
 .descriptionPost {
     font-size: 0.9em;
 
@@ -24,6 +13,7 @@
 
 .itemListCat {
     margin-right: 5px;
+    margin-top: 5px;
 }
 
 .TitleDetailspage {
@@ -33,4 +23,16 @@
 
 .userDataColumnDetails {
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+
 }
+
+.PostDetailsPage {
+    background-color: rgb(255, 240, 200);
+}
+
+/* .DescriptionContainer {
+    background-color: red;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: justify;
+} */

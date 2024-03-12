@@ -41,9 +41,7 @@ class PostServices {
     deletePost = (postId) => {
         return this.axiosApp.delete(`/api/post/${postId}`)
     }
-    getAllResponsesFromPost = (postId) => {
-        return this.axiosApp.get(`/api/post/${postId}/responses`)
-    }
+
 }
 
 export default new PostServices()
