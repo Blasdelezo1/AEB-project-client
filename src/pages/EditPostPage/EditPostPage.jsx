@@ -3,7 +3,6 @@ import './EditpostPage.css'
 import { Container, Row, Col } from 'react-bootstrap'
 
 
-
 const EditpostPage = () => {
 
     return (

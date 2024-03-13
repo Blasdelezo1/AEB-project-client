@@ -8,7 +8,6 @@ import postServices from '../../services/post.services'
 
 const LearnPage = () => {
 
-
     const [showModal, setShowModal] = useState(false)
     const [posts, setPosts] = useState([])
 
@@ -30,7 +29,6 @@ const LearnPage = () => {
             .catch((error) => console.log(error))
     }
 
-
     return (
 
         <div className="LearnPage">
@@ -42,16 +40,15 @@ const LearnPage = () => {
                     <Col md={{ span: 10, offset: 1 }}>
 
                         <h1 className='headerLearn'>Listado de Posiciones</h1>
-
                         <hr className='mb-5' />
 
                         <AllPostList posts={posts} />
 
                         <Button
                             variant={'dark'}
-                            onClick={handleShow}
-                        >
-                            Comparte una Posicion</Button>
+                            onClick={handleShow} >
+                            Comparte una Posicion
+                        </Button>
 
                         <hr className='mb-5' />
 
@@ -61,21 +58,23 @@ const LearnPage = () => {
 
             </Container>
 
-
             <Modal show={showModal} onHide={handleClose} centered>
+
                 <Modal.Header closeButton className='modalCloseButton'>
+
                     <Modal.Title className="NavBar-modal-tile" >
                         Añade una posición
                     </Modal.Title>
+
                 </Modal.Header>
+
                 <Modal.Body>
                     <NewPostForm handleClose={handleClose} refreshPosts={loadPostDetails} />
                 </Modal.Body>
+
             </Modal>
 
         </div>
-
-
     )
 }
 

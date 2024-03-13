@@ -3,7 +3,7 @@ import { Col } from 'react-bootstrap'
 import ResponseCard from '../ResponseCard/ResponseCard'
 
 
-function ResponsePostList({ responses, deleteResponse }) {
+function ResponsePostList({ responses, deleteResponse, loadResponsesFromPost }) {
 
     return (
         <div className="ResponsePostList">
@@ -12,7 +12,7 @@ function ResponsePostList({ responses, deleteResponse }) {
             {
                 responses.map((response) => (
                     <Col key={response._id} className='mb-3'>
-                        <ResponseCard  {...response} deleteResponse={deleteResponse} />
+                        <ResponseCard  {...response} deleteResponse={deleteResponse} loadResponsesFromPost={loadResponsesFromPost} />
                     </Col>
                 ))
             }

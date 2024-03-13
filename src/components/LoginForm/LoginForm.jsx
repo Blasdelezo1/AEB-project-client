@@ -1,9 +1,9 @@
 import './LoginForm.css'
 import { useContext, useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { AuthContext } from '../../Context/Auth.context'
-import { Container, Button, Col, Form, ButtonGroup, Row } from 'react-bootstrap'
-import userServices from '../../services/user.services'
+import { Button, Col, Form, Row } from 'react-bootstrap'
+import authServices from '../../services/auth.services'
 
 
 function LoginPage({ handleClose, handleShow }) {
@@ -14,14 +14,14 @@ function LoginPage({ handleClose, handleShow }) {
         email: '',
         password: ''
     })
-
+    const [errorMessage, setErrorMessage] = useState(undefined)
     const { storeToken, authenticateUser } = useContext(AuthContext)
 
     const handleLoginSubmit = (e) => {
 
         e.preventDefault()
 
-        userServices
+        authServices
             .login(loginData)
             .then((response) => {
                 storeToken(response.data.authToken)
@@ -30,10 +30,8 @@ function LoginPage({ handleClose, handleShow }) {
                 navigate('/')
             })
             .catch((error) => {
-                // const errorDescription = error.response.data.message
-                // setErrorMessage(errorDescription)
-                //¿?como se integra esto!!
-                console.log('ERROR', error)
+                const errorDescription = error.response.data.message
+                setErrorMessage(errorDescription)
             })
 
     }
@@ -47,43 +45,45 @@ function LoginPage({ handleClose, handleShow }) {
 
     }
 
-
     return (
+        <>
+            <Form onSubmit={handleLoginSubmit} className='LoginForm'>
+                <Row>
+                    <Col md={{ span: 10, offset: 1 }}>
 
-        <Form onSubmit={handleLoginSubmit} className='LoginForm'>
-            <Row>
-                <Col md={{ span: 10, offset: 1 }}>
+                        <Form.Group controlId='email' className='mb-3'>
+                            <Form.Label>Correo electrónico</Form.Label>
+                            <Form.Control
+                                name='email'
+                                onChange={handleInputChange}
+                            />
+                        </Form.Group>
 
-                    <Form.Group controlId='email' className='mb-3'>
-                        <Form.Label>Correo electrónico</Form.Label>
-                        <Form.Control
-                            name='email'
-                            onChange={handleInputChange}
-                        />
-                    </Form.Group>
+                        <Form.Group controlId='password' className='mb-3'>
+                            <Form.Label>Contraseña</Form.Label>
+                            <Form.Control
+                                type='password'
+                                name='password'
+                                onChange={handleInputChange}
+                            />
+                        </Form.Group>
 
-                    <Form.Group controlId='password' className='mb-3'>
-                        <Form.Label>Contraseña</Form.Label>
-                        <Form.Control
-                            type='password'
-                            name='password'
-                            onChange={handleInputChange}
-                        />
-                    </Form.Group>
+                        <div className="login-buttons">
+                            <Button type='submit' variant="outline-success">Login</Button>
 
-                    <div className="login-buttons">
-                        <Button type='submit' variant="outline-success">Login</Button>
+                            <Button
+                                variant="outline-primary"
+                                onClick={() => handleShow('signup')}
+                            >Sign Up
+                            </Button>
+                        </div>
+                    </Col>
+                </Row>
+            </Form>
 
-                        <Button
-                            variant="outline-primary"
-                            onClick={() => handleShow('signup')}
-                        >Sign Up</Button>
-
-
-                    </div>
-                </Col>
-            </Row>
-        </Form>
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
+            <p className='mt-3'><strong>Si no tienes una cuenta?? haz click en Sign Up</strong> </p>
+        </>
     )
 }
 

@@ -1,3 +1,4 @@
+
 export const getCurrentCategories = (name, checked, categories) => {
 
     const currentCategories = checked ?

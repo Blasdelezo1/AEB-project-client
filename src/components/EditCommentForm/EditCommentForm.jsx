@@ -1,18 +1,12 @@
 import './EditCommentForm.css'
 import { useState, useEffect, useContext } from 'react'
 import { AuthContext } from '../../Context/Auth.context'
-import { useParams, useNavigate } from 'react-router-dom'
-
-
-import { Form, Row, Col, Button } from 'react-bootstrap'
-
+import { Form, Button } from 'react-bootstrap'
 import ResponseServices from './../../services/respose.services'
 
-function EditCommentForm({ responseId, toggleEditModal }) {
+function EditCommentForm({ responseId, toggleEditModal, loadResponsesFromPost }) {
 
     const { user } = useContext(AuthContext)
-
-    // const navigate = useNavigate()
 
     const [commentDataToEdit, setCommentDataToEdit] = useState({
         comment: "",
@@ -36,9 +30,8 @@ function EditCommentForm({ responseId, toggleEditModal }) {
         ResponseServices
             .updateResponse(responseId, commentDataToEdit)
             .then(() => {
-                loadResponseDetails()
+                loadResponsesFromPost()
                 toggleEditModal()
-                // navigate(`/aprende/${postId}`)
             })
     }
 
@@ -50,7 +43,7 @@ function EditCommentForm({ responseId, toggleEditModal }) {
     return (
 
         <div className="EditCommentForm">
-            <h5>Editar comentario</h5>
+
             <div className='ResponseForm'>
 
                 <hr className='mb-2' />
@@ -69,7 +62,6 @@ function EditCommentForm({ responseId, toggleEditModal }) {
                         variant="outline-success"
                         className='SubmitButtonResponse mb-5'
                         type='submit'>
-
                         Submit
                     </Button>
                 </Form>

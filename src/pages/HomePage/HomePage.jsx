@@ -2,13 +2,14 @@ import './HomePage.css'
 import heroLayout from './../../assets/backgammon_layout.jpg'
 import secondSection from './../../assets/backgmmon tournament.jpg'
 import wtcham from './../../assets/WTCHAMP.jpg'
-import { Row, Col, Container } from 'react-bootstrap'
+import { Row, Col } from 'react-bootstrap'
 const HomePage = () => {
 
     return (
         < div className="HomePage" >
             <section className='HomePage-section'>
                 <Row className='align-items-center'>
+
                     <Col md={6} className='text-center'>
                         <div className='container-text'>
                             <h1>Bienvenido a la Asociación Española de Backgammon</h1>
@@ -28,11 +29,13 @@ const HomePage = () => {
                         </div>
 
                     </Col>
+
                     <Col md={6}>
                         <div className='background-image'>
                             <img src={heroLayout} alt="heroLayout" className='heroLayout-img' />
                         </div>
                     </Col>
+
                 </Row>
             </section>
             <section>
@@ -44,6 +47,7 @@ const HomePage = () => {
                             <img src={secondSection} alt="heroLayout" className='heroLayout-img' />
                         </div>
                     </Col>
+
                     <Col md={6} className='text-center'>
                         <div className='container-text'>
                             <h1>Regístrate y no te pierdas las últimas noticias y eventos de backgammon</h1>
@@ -65,7 +69,9 @@ const HomePage = () => {
                     </Col>
 
                 </Row>
+
                 <Row className='align-items-center'>
+
                     <Col md={6} className='text-center'>
                         <div className='container-text'>
                             <h1>Únete a nuestra comunidad y lleva tu juego de backgammon al siguiente nivel.</h1>
@@ -85,13 +91,14 @@ const HomePage = () => {
                         </div>
 
                     </Col>
+
                     <Col md={6}>
                         <div className='background-image'>
                             <img src={wtcham} alt="heroLayout" className='heroLayout-img' />
                         </div>
                     </Col>
-                </Row>
 
+                </Row>
 
             </section>
         </div >

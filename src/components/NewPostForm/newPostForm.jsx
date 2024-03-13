@@ -2,14 +2,11 @@ import './newPostForm.css'
 import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Button, Form, Row, Col } from "react-bootstrap"
-
-
 import { BACKGAMMON_CATEGORIES } from '../../consts/post.const'
 import { getCurrentCategories } from '../../utils/post.utils'
 import uploadServices from '../../services/upload.services'
 import { AuthContext } from '../../Context/Auth.context'
 import postServices from '../../services/post.services'
-
 
 
 function NewPostForm({ handleClose, refreshPosts }) {
@@ -84,7 +81,6 @@ function NewPostForm({ handleClose, refreshPosts }) {
             })
     }
 
-
     return (
 
         <Form onSubmit={handleFormSubmit}>
@@ -107,7 +103,6 @@ function NewPostForm({ handleClose, refreshPosts }) {
                             type='file'
                             onChange={handleFileUpload}
                             name={'cover'}
-                        // value={newPost.cover}
                         />
                     </Form.Group>
                 </Col>

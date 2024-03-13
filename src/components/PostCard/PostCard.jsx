@@ -1,54 +1,61 @@
 import './PostCard.css'
 import { Card, Button } from "react-bootstrap"
 import { Link } from "react-router-dom"
-import { useContext, useState } from "react"
+import { useContext } from "react"
 import { AuthContext } from '../../Context/Auth.context'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClock, faShareAlt, faHeart } from '@fortawesome/free-solid-svg-icons'
+import postServices from '../../services/post.services'
+import { formatDate } from '../../utils/date.utils'
 
-import userServices from './../../services/user.services'
 
-function PostCard({ _id, cover, title, createdAt, categories, owner }) {
+function PostCard({ _id: postId, cover, title, createdAt, categories, owner, isFavorite, getUserFavs }) {
 
     const { user } = useContext(AuthContext)
 
-    const formatDate = (dateString) => {
-        const date = new Date(dateString);
-        const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
-        return formattedDate;
+    const handleFavoriteChange = () => {
+
+        const action = isFavorite ? postServices.removeFavorites : postServices.addToFavorites
+
+        action(user._id, postId)
+            .then(() => getUserFavs())
+            .catch(error => console.log(error))
     }
-
-    const handleAddToFavorites = () => {
-
-        userServices
-            .addToFavorites(user._id)
-        // FALTA EL THEN Y EL CATCH
-    }
-
 
     return (
         <div className='PostCardLink'>
+
             <Card className='PostCard'>
+
                 <div className='postHeader'>
+
                     <FontAwesomeIcon
                         icon={faClock}
                         className="me-2" />
                     {formatDate(createdAt)}
-                    {owner && owner.avatar && <img className='avatarPost' src={owner.avatar} alt="Avatar" />}
+
+                    {owner && owner.avatar &&
+                        <img className='avatarPost' src={owner.avatar} alt="Avatar" />}
+
                     <p className='categoriesCard'> {`Categorias | ${categories}`}</p>
                 </div>
+
                 <div className='imgContainerPost'>
                     <Card.Img
                         className='imgPost'
                         src={cover} />
                 </div>
+
                 <Card.Body className='infoPostCard'>
                     <Card.Title
                         className='titleCard'>
                         {title}
                     </Card.Title>
-                    <div className="d-flex flex-row align-items-center justify-content-between">
-                        <Link to={`/aprende/${_id}`}>
+
+                    <div className="d-flex flex-row align-items-center 
+                    justify-content-between">
+
+                        <Link to={`/aprende/${postId}`}>
                             <Button
                                 variant="link"
                                 className="link-danger p-md-1 my-1">
@@ -60,52 +67,23 @@ function PostCard({ _id, cover, title, createdAt, categories, owner }) {
                             className="shareLogo"
                             data-mdb-toggle="tooltip"
                             data-mdb-placement="top"
-                            title="Share this post" />
+                            title="Share this post"
+                        />
                         <FontAwesomeIcon
-                            onClick={handleAddToFavorites}
+                            onClick={handleFavoriteChange}
                             icon={faHeart}
                             className="heartLogo"
                             data-mdb-toggle="tooltip"
                             data-mdb-placement="top"
-                            title="like" />
-
+                            title="like"
+                            style={{ color: isFavorite ? 'red' : 'black' }}
+                        />
                     </div>
-                    {/* <Card.Text className='descriptionCard'>{description}</Card.Text> */}
-                    {/* <Card.Text className='categoriesCard'>{categories}</Card.Text> */}
+
                 </Card.Body>
             </Card>
         </div>
     )
-
 }
 
 export default PostCard
-{/* 
-// < Link to = {`/aprende/${_id}`} className = 'PostCardLink' >
-
-//     <Card className='PostCard'>
-//         <div className='imgContainerPost'>
-//             <Card.Img className='imgPost' src={cover} />
-//         </div>
-
-//         <Card.Body className='infoPostCard'>
-
-//             <Card.Title
-//                 className='titleCard'> */}
-{/* //                 {title}
-//             </Card.Title>
-//             <Card.Text
-//                 className='descriptionCard'>
-//                 {description}
-//             </Card.Text>
-//             <Card.Text */}
-{/* //                 className='categoriesCard'>
-//                 {categories}
-//             </Card.Text>
-//         </Card.Body>
-//         <Card.Footer
-//             className="footerCard">
-//             {`Creado por ${user} el ${formatDate(createdAt)}`}
-//         </Card.Footer>
-//     </Card>
-//     </Link > */}

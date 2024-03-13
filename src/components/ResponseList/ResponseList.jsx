@@ -1,3 +1,9 @@
+
+//FUTURAS APLICACIONES...RENDERIZADO DE LAS TODAS LAS RESPONSES.
+
+
+
+
 // import './ResponseList.css'
 // import { useState, useEffect } from "react"
 // import postServices from '../../services/post.services'

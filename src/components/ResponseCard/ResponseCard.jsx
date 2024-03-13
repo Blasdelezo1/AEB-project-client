@@ -1,10 +1,12 @@
 import './ResponseCard.css'
-import { Card, Button, Row, Col, DropdownButton, Dropdown, Modal } from "react-bootstrap"
-import { useEffect, useState, useContext } from 'react'
+import { Card, Button, Row, Col, Modal } from "react-bootstrap"
+import { useState, useContext } from 'react'
 import { AuthContext } from '../../Context/Auth.context'
 import EditCommentForm from '../EditCommentForm/EditCommentForm'
+import { formatDate } from '../../utils/date.utils'
 
-function ResponseCard({ comment, owner, createdAt, deleteResponse, _id, }) {
+
+function ResponseCard({ comment, owner, createdAt, deleteResponse, _id, loadResponsesFromPost }) {
 
     const { user } = useContext(AuthContext)
 
@@ -12,12 +14,6 @@ function ResponseCard({ comment, owner, createdAt, deleteResponse, _id, }) {
 
     const toggleEditModal = () => {
         setShowEditModal(!showEditModal);
-    }
-
-    const formatDate = (dateString) => {
-        const date = new Date(dateString)
-        const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
-        return formattedDate
     }
 
     return (
@@ -58,7 +54,7 @@ function ResponseCard({ comment, owner, createdAt, deleteResponse, _id, }) {
                     <Modal.Title>Editar comentario</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <EditCommentForm responseId={_id} />
+                    <EditCommentForm responseId={_id} toggleEditModal={toggleEditModal} loadResponsesFromPost={loadResponsesFromPost} />
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={toggleEditModal}>Cerrar</Button>
@@ -70,26 +66,3 @@ function ResponseCard({ comment, owner, createdAt, deleteResponse, _id, }) {
 }
 
 export default ResponseCard
-
-
-// < Row >
-
-// <Col className='text-center mb-1 mt-1'>
-//     <DropdownButton
-//         id="dropdown-basic-button"
-//         title="Editar"
-//     >
-//         <Dropdown.Item href="#"
-//             onClick={loadResponseDetails}>
-//             <EditCommentForm />
-//         </Dropdown.Item>
-//     </DropdownButton>
-//     <Button
-//         variant="dark"
-//         className='detail-page-buttons'
-//         onClick={() => deleteResponse(_id)}>
-//         Eliminar
-//     </Button>
-
-// </Col>
-//         </Row >

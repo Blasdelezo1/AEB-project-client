@@ -1,14 +1,10 @@
 import './SignUpForm.css'
 import { useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
-import axios from "axios"
+import { useNavigate } from "react-router-dom"
 import Form from 'react-bootstrap/Form'
 import { Button, Row, Col } from 'react-bootstrap'
 import uploadServices from '../../services/upload.services'
-
-uploadServices
-
-const API_BASE_URL = "http://localhost:5005"
+import authServices from '../../services/auth.services'
 
 
 const SignupPage = ({ handleClose }) => {
@@ -28,8 +24,8 @@ const SignupPage = ({ handleClose }) => {
     const handleFormSubmit = (e) => {
         e.preventDefault()
 
-        axios
-            .post(`${API_BASE_URL}/api/auth/signup`, newUser)
+        authServices
+            .signUp(newUser)
             .then(() => {
                 navigate(`/`)
                 handleClose()
@@ -48,6 +44,7 @@ const SignupPage = ({ handleClose }) => {
         })
 
     }
+
     const handleFileUpload = e => {
 
         setIsLoadingImage(true)
@@ -69,11 +66,10 @@ const SignupPage = ({ handleClose }) => {
     }
 
     return (
-
-
         <Form onSubmit={handleFormSubmit}>
             <Row>
                 <Col md={{ span: 10, offset: 1 }}>
+
                     <Form.Group controlId='email' className='mb-3'>
                         <Form.Label>Correo electrónico</Form.Label>
                         <Form.Control
@@ -122,10 +118,10 @@ const SignupPage = ({ handleClose }) => {
                             {isLoadingimage ? 'cargando imagen' : 'Sign Up'}
                         </Button>
                     </div>
+
                 </Col>
             </Row>
         </Form>
-
     )
 }
 

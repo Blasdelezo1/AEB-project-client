@@ -12,7 +12,7 @@ function AuthProviderWrapper(props) {
     const [user, setUser] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    //for protected routes so it doent redirect to login
+    //for protected routes so it doent redirect to login, in any case they are in a modal so it doesnt aply but usefull
     const [isLoading, setIsLoading] = useState(true)
 
     const storeToken = tokenValue => {

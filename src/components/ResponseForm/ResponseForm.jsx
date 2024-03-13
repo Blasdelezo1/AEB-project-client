@@ -2,7 +2,7 @@ import './ResponseForm.css'
 import { Button, Form } from "react-bootstrap"
 import { AuthContext } from '../../Context/Auth.context'
 import resposeServices from '../../services/respose.services'
-import { useEffect, useState, useContext } from 'react'
+import { useState, useContext } from 'react'
 
 function ResponseForm({ postId, loadResponsesFromPost }) {
 
@@ -34,9 +34,12 @@ function ResponseForm({ postId, loadResponsesFromPost }) {
 
     return (
         <div className='ResponseForm'>
+
             <h3>Comenta</h3>
             <hr className='mb-2' />
+
             <Form onSubmit={handleFormSubmit}>
+
                 <Form.Group className="ResponseForm-comment mb-3" controlId="comment">
                     <Form.Label>Deja tu comentario</Form.Label>
                     <Form.Control
@@ -44,23 +47,20 @@ function ResponseForm({ postId, loadResponsesFromPost }) {
                         onChange={handleInputChange}
                         as="textarea"
                         rows={3}
-                        value={newResponse.comment}
-
-                    />
+                        value={newResponse.comment} />
                 </Form.Group>
+
                 <Button
                     variant="outline-success"
                     className='SubmitButtonResponse mb-5'
-                    type='submit'
-                >
-                    Submit</Button>
+                    type='submit'>
+                    Submit
+                </Button>
+
             </Form>
+
         </div>
-
     )
-
-
-
 }
 
 export default ResponseForm

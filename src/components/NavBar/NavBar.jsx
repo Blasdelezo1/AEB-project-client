@@ -1,24 +1,14 @@
 import './NavBar.css'
-import Button from 'react-bootstrap/Button'
-import Container from 'react-bootstrap/Container'
-import Nav from 'react-bootstrap/Nav'
-import Navbar from 'react-bootstrap/Navbar'
-import Offcanvas from 'react-bootstrap/Offcanvas'
-import Modal from 'react-bootstrap/Modal'
-
+import { Button, Container, Nav, Navbar, Offcanvas, Modal } from 'react-bootstrap'
 import appIcon from './../../assets/AEB_FB.png'
-import { Link, NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { AuthContext } from '../../Context/Auth.context'
 import { useContext, useState } from 'react'
-
 import LoginForm from '../LoginForm/LoginForm'
-
 import SignupForm from '../SignUpForm/SignUpForm'
 
 
 function NavBar() {
-
-
 
     const [modalContent, setModalContent] = useState()
     const [showModal, setShowModal] = useState(false)
@@ -30,9 +20,6 @@ function NavBar() {
     const handleClose = () => setShowModal(false)
 
     const handleOfCanvasClose = () => setShowOfCanvas(false)
-
-
-
 
     const handleShow = (modalContent) => {
         setModalContent(modalContent)
@@ -68,7 +55,6 @@ function NavBar() {
                             show={showOfCanvas}
                             onHide={handleOfCanvasClose}
                         >
-
                             <Offcanvas.Header closeButton>
                                 <Offcanvas.Title id="offcanvasNavbarLabel-expand-lg">
                                     Menu
@@ -76,7 +62,6 @@ function NavBar() {
                             </Offcanvas.Header>
 
                             <Offcanvas.Body>
-
                                 <Nav className="justify-content-center flex-grow-1 pe-3">
                                     <Link
                                         to='/'
@@ -122,7 +107,7 @@ function NavBar() {
                                                 className="NavBar-button mt-3">
                                                 Log Out
                                             </Button>
-                                            {/* <p className='NavBar-profile'>{user.name}</p> */}
+
                                             <Link to='/profile'>
                                                 <img
                                                     className='avatarImg'
@@ -130,7 +115,6 @@ function NavBar() {
                                                     alt="efsf" />
                                             </Link>
                                         </>
-
                                     )
                                 }
                                 {
@@ -183,7 +167,6 @@ function NavBar() {
                 </Modal.Body>
             </Modal>
         </div>
-
     )
 }
 

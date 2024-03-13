@@ -1,11 +1,20 @@
+import ProfileCard from '../../components/ProfileCard/ProfileCard'
 import './ProfilePage.css'
-
+import { Col, Row, Container } from "react-bootstrap"
 function ProfilePage() {
 
 
     return (
         <div className="ProfilePage">
-            <h1>Perfil</h1>
+            <Container>
+                <Row className='justify-content-center'>
+                    <Col md={6} >
+                        <ProfileCard />
+                    </Col>
+                </Row>
+            </Container>
+
+
         </div>
     )
 

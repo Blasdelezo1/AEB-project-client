@@ -1,6 +1,8 @@
 import axios from 'axios'
 
-class userServices {
+const API_BASE_URL = "http://localhost:5005"
+
+class AuthServices {
 
     constructor() {
 
@@ -20,9 +22,12 @@ class userServices {
         })
     }
 
-    getUserFavs(userId) {
-        return this.axiosApp.get(`/api/user/${userId}/favs`)
+    login(loginData) {
+        return this.axiosApp.post(`${API_BASE_URL}/api/auth/login`, loginData)
+    }
+    signUp(signUpData) {
+        return this.axiosApp.post(`${API_BASE_URL}/api/auth/signup`, signUpData)
     }
 }
 
-export default new userServices()
+export default new AuthServices()
