@@ -26,9 +26,9 @@ function ResponseCard({ comment, owner, createdAt, deleteResponse, _id, loadResp
 
                     </Col>
                     <Col md={{ span: 10 }}>
-                        <p>{comment}</p>
-                        <hr />
-                        <p>Escrito por {user.name} | {formatDate(createdAt)}</p>
+                        <p className='commentItself'>{comment}</p>
+                        <hr className='brColorSeparator' />
+                        <p className='nameAndDateComment'>Escrito por {user.name} | {formatDate(createdAt)}</p>
                     </Col>
                 </Row>
 

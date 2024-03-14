@@ -23,6 +23,9 @@ class userServices {
     getUserFavs(userId) {
         return this.axiosApp.get(`/api/user/${userId}/favs`)
     }
+    getAllFavourites(userId) {
+        return this.axiosApp.get(`/api/user/${userId}/all-favs`)
+    }
 }
 
 export default new userServices()

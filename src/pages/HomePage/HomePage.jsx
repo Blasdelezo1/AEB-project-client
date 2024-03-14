@@ -70,9 +70,9 @@ const HomePage = () => {
 
                 </Row>
 
-                <Row className='align-items-center'>
+                <Row className='lastHpRow align-items-center mb-4'>
 
-                    <Col md={6} className='text-center'>
+                    <Col md={6} className='text-center mb-4'>
                         <div className='container-text'>
                             <h1>Únete a nuestra comunidad y lleva tu juego de backgammon al siguiente nivel.</h1>
                             <hr className='ml-3' />
@@ -92,7 +92,7 @@ const HomePage = () => {
 
                     </Col>
 
-                    <Col md={6}>
+                    <Col md={6} className='mb-4' >
                         <div className='background-image'>
                             <img src={wtcham} alt="heroLayout" className='heroLayout-img' />
                         </div>
@@ -107,16 +107,3 @@ const HomePage = () => {
 }
 
 export default HomePage
-
-
-
-// <div className="HomePage">
-//     <section className='HomePage-sectio1'>
-//         <div className="contentContainer">
-//             <h1 className="title">Asociación Española de Backgammon</h1>
-//             <p className="description">Únete a nuestra comunidad de entusiastas del backgammon!</p>
-//         </div>
-
-//     </section>
-
-// </div>

@@ -3,7 +3,7 @@
 }
 
 .descriptionPost {
-    font-size: 0.9em;
+    font-size: 0.3em;
 
 }
 
@@ -21,18 +21,26 @@
 
 }
 
-.userDataColumnDetails {
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-
-}
-
 .PostDetailsPage {
-    background-color: rgb(255, 240, 200);
+    background-color: rgb(255, 254, 253);
 }
 
-/* .DescriptionContainer {
-    background-color: red;
-    display: flex;
-    flex-wrap: wrap;
+.avatarPostDetails {
+    width: 20%;
+    height: 20%;
+    border-radius: 50%;
+}
+
+.categoriesTitle {
+    padding-top: 33px;
+
+}
+
+.descriptionDetails {
     text-align: justify;
-} */
+}
+
+.buttonsPostDetails {
+    padding-bottom: 30px;
+
+}

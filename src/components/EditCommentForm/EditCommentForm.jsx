@@ -64,6 +64,7 @@ function EditCommentForm({ responseId, toggleEditModal, loadResponsesFromPost })
                         type='submit'>
                         Submit
                     </Button>
+
                 </Form>
             </div>
 

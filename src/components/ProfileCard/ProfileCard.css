@@ -8,10 +8,23 @@
 .profileName {
     font-size: 1.5em;
     font-weight: bold;
-    margin-left: 70px;
+    margin-left: 90px;
     margin-top: 20px;
 }
 
 .Profile-title {
     text-align: center;
+}
+
+.profileFlag {
+    width: 10%;
+    height: 10%;
+    margin-top: 50px;
+}
+
+.profileCard {
+    background-color: #f5f7fa;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    min-height: 400px;
+
 }

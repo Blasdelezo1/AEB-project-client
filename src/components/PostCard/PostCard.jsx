@@ -14,16 +14,14 @@ function PostCard({ _id: postId, cover, title, createdAt, categories, owner, isF
     const { user } = useContext(AuthContext)
 
     const handleFavoriteChange = () => {
-
-        const action = isFavorite ? postServices.removeFavorites : postServices.addToFavorites
-
-        action(user._id, postId)
+        postServices
+            .handleFavorites(isFavorite, user._id, postId)
             .then(() => getUserFavs())
             .catch(error => console.log(error))
     }
 
     return (
-        <div className='PostCardLink'>
+        <div>
 
             <Card className='PostCard'>
 

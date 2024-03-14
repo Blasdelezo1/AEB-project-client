@@ -86,23 +86,24 @@ function PostDetailsPage() {
                                 <Row className='justify-content-center'>
                                     <Col md={6} className='text-center mb-3 mt-3'>
                                         <img src={postDetails.cover} alt="PostCover" className='img-fluid' />
+                                        <hr />
                                     </Col>
                                 </Row>
 
                                 <Row className='justify-content-center'>
                                     <Col md={3} className='userDataColumnDetails mb-1 mt-1' >
                                         <div className='text-center'>
-                                            {postDetails.owner && postDetails.owner.avatar && <img className='avatarPost' src={postDetails.owner.avatar} alt="OwnerAvatar" />}
+                                            {postDetails.owner && postDetails.owner.avatar && <img className='avatarPostDetails' src={postDetails.owner.avatar} alt="OwnerAvatar" />}
                                             <hr />
-                                            <p>{postDetails.owner?.name}</p>
-                                            <p>{formatDate(postDetails.createdAt)}</p>
+                                            <p>{`Creado por : ${postDetails.owner?.name}`}</p>
+                                            <p>{`En fecha : ${formatDate(postDetails.createdAt)}`}</p>
                                         </div>
                                     </Col>
 
                                     <Col md={3} className='userDataColumnDetails mb-1 mt-1'>
                                         <div className='text-center'>
-                                            <h6 className="categoriesTitle mb-3">Categoría/s</h6>
-                                            <hr />
+                                            <h6 className="categoriesTitle mb-4">Categoría/s</h6>
+                                            <hr className='mb-3' />
                                             <div className='categoriesDetails mb-3'>
                                                 {postDetails.categories && postDetails.categories.map((category, index) => (
                                                     <Button key={index} className='itemListCat' variant="outline-success">
@@ -117,7 +118,7 @@ function PostDetailsPage() {
 
                                 <Row className='DescriptionContainer justify-content-center'>
                                     <Col md={6} className='userDataColumnDetails text-center mt-2'>
-                                        <p style={{ wordWrap: 'break-word', maxWidth: '100%' }}>{postDetails.description}</p>
+                                        <p className='descriptionDetails' style={{ wordWrap: 'break-word', maxWidth: '100%' }}>{postDetails.description}</p>
                                     </Col>
                                 </Row>
                             </>
@@ -136,7 +137,7 @@ function PostDetailsPage() {
 
                         <Row>
 
-                            <Col className='text-center mb-5 mt-5'>
+                            <Col className='buttonsPostDetails text-center mb-5 mt-5'>
                                 <Link to={"/aprende"}>
                                     <Button
                                         variant="outline-secondary"

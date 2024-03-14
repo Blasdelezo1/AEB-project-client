@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react'
 import './EditPostForm.css'
 import { AuthContext } from '../../Context/Auth.context'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, Link } from 'react-router-dom'
 import postServices from '../../services/post.services'
 import { getCurrentCategories } from '../../utils/post.utils'
 import { Form, Row, Col, Button } from 'react-bootstrap'
@@ -103,7 +103,6 @@ function EditPostForm() {
                                 type='file'
                                 onChange={handleFileUpload}
                                 name={'cover'}
-                            // value={postDataToEdit.cover}
                             />
                         </Form.Group>
                     </Col>
@@ -176,6 +175,15 @@ function EditPostForm() {
                         variant="outline-primary">
                         Submit
                     </Button>
+                    <Link to={`/aprende/${postId}`}>
+                        <Button
+                            variant="outline-primary"
+                            className='Submit-post-button'
+                            type='submit'>
+                            Cancelar
+                        </Button>
+                    </Link>
+
                 </div>
 
             </Form >

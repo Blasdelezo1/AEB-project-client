@@ -42,13 +42,12 @@ class PostServices {
         return this.axiosApp.delete(`/api/post/${postId}`)
     }
 
-    addToFavorites(userId, postId) {
-        return this.axiosApp.put(`/api/post/add-fav`, { userId, postId })
+    handleFavorites(isFavourite, userId, postId) {
+        const endpoint = isFavourite ? 'remove-fav' : 'add-fav'
+        return this.axiosApp.put(`/api/post/${endpoint}`, { userId, postId })
     }
 
-    removeFavorites(userId, postId) {
-        return this.axiosApp.put(`/api/post/remove-fav`, { userId, postId })
-    }
+
 }
 
 export default new PostServices()

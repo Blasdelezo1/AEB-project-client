@@ -2,9 +2,8 @@
     text-align: center;
     background-color: #f5f5dc;
     color: black;
-    position: fixed;
+    position: absolute;
     bottom: 0;
-    left: 0;
     width: 100%;
 
 }

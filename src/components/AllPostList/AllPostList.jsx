@@ -4,6 +4,7 @@ import { Row, Col } from 'react-bootstrap'
 import PostCard from './../../components/PostCard/PostCard'
 import userServices from './../../services/user.services'
 import { AuthContext } from '../../Context/Auth.context'
+// import SearchBar from "../SearchBar/SearchBar"
 
 function AllPostList({ posts }) {
 
