@@ -3,7 +3,7 @@ import { AuthContext } from '../../Context/Auth.context'
 import { Card, Button, Col, Row } from "react-bootstrap"
 import { useContext, useState, useEffect } from 'react'
 import userServices from '../../services/user.services'
-import { Link, useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 
 function ProfileCard() {
