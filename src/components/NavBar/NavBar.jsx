@@ -104,11 +104,12 @@ function NavBar() {
                                                 }}
 
                                                 variant="dark"
-                                                className="NavBar-button mt-3">
+                                                className="logout NavBar-button mt-3">
                                                 Log Out
                                             </Button>
 
-                                            <Link to='/profile'>
+                                            <Link to='/profile'
+                                                onClick={() => handleOfCanvasClose()}>
                                                 <img
                                                     className='avatarImg'
                                                     src={user.avatar}
