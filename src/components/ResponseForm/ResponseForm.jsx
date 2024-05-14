@@ -23,6 +23,10 @@ function ResponseForm({ postId, loadResponsesFromPost }) {
             .createResponse(newResponse)
             .then(() => {
                 loadResponsesFromPost()
+                setNewResponse({
+                    ...newResponse,
+                    comment: ""
+                });
             })
             .catch(err => console.log(err))
     }

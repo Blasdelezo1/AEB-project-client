@@ -45,6 +45,8 @@
 }
 
 .NavBar-modal-tile {
-    text-align: center;
     margin-left: 175px;
+    text-align: center;
 }
+
+/* align buttons with the property align items so they dont stretch */

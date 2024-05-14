@@ -1,4 +1,4 @@
-.profileAVatar {
+/* .profileAVatar {
     width: 50%;
     border-radius: 50%;
     margin-top: 20px;
@@ -26,5 +26,47 @@
     background-color: #f5f7fa;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
     min-height: 400px;
+
+} */
+
+.Profile-title {
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.ProfileCard {
+    background-color: #121212;
+    color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.profileAvatar img {
+    width: 100%;
+    height: auto;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+
+.mb-4 {
+    text-align: left;
+    padding-left: 15px;
+    margin-left: 0;
+}
+
+.Align {
+    align-items: center;
+    padding: 20px;
+}
+
+hr {
+    border-color: #d4d0d0;
+}
+
+a {
+    color: #4c9aff;
 
 }

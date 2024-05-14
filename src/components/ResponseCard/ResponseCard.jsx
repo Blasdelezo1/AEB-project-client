@@ -4,12 +4,11 @@ import { useState, useContext } from 'react'
 import { AuthContext } from '../../Context/Auth.context'
 import EditCommentForm from '../EditCommentForm/EditCommentForm'
 import { formatDate } from '../../utils/date.utils'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 
 function ResponseCard({ comment, owner, createdAt, deleteResponse, _id, loadResponsesFromPost }) {
-
     const { user } = useContext(AuthContext)
-
     const [showEditModal, setShowEditModal] = useState(false);
 
     const toggleEditModal = () => {
@@ -18,38 +17,29 @@ function ResponseCard({ comment, owner, createdAt, deleteResponse, _id, loadResp
 
     return (
         <div className="ResponseCard">
-
-            <Card className="ResponseCard">
+            <Card className="customCard">
                 <Row>
-                    <Col md={{ span: 2 }}>
+                    <Col md={2} className="avatarCol">
                         {owner.avatar && <img className='avatarResponse' src={owner.avatar} alt="responseOwnerAvatar" />}
-
                     </Col>
-                    <Col md={{ span: 10 }}>
+                    <Col md={10}>
                         <p className='commentItself'>{comment}</p>
                         <hr className='brColorSeparator' />
                         <p className='nameAndDateComment'>Escrito por {user.name} | {formatDate(createdAt)}</p>
                     </Col>
                 </Row>
-
             </Card>
             <Row>
-                <Col className='text-center mb-1 mt-1'>
-                    <Button
-                        variant="primary"
-                        onClick={toggleEditModal}
-                        className='edit-button-comment'>
-                        Editar comentario
+                <Col className='buttonCol'>
+                    <Button variant="light" onClick={toggleEditModal} className='icon-button'>
+                        <FontAwesomeIcon icon={faEdit} />
                     </Button>
-                    <Button
-                        variant="dark"
-                        className='delete-button-comment'
-                        onClick={() => deleteResponse(_id)}>
-                        Eliminar
+                    <Button variant="light" className='icon-button' onClick={() => deleteResponse(_id)}>
+                        <FontAwesomeIcon icon={faTrashAlt} />
                     </Button>
                 </Col>
             </Row>
-            <Modal show={showEditModal} onHide={toggleEditModal}>
+            <Modal show={showEditModal} onHide={toggleEditModal} className="editModal">
                 <Modal.Header closeButton>
                     <Modal.Title>Editar comentario</Modal.Title>
                 </Modal.Header>
@@ -60,8 +50,7 @@ function ResponseCard({ comment, owner, createdAt, deleteResponse, _id, loadResp
                     <Button variant="secondary" onClick={toggleEditModal}>Cerrar</Button>
                 </Modal.Footer>
             </Modal>
-
-        </div >
+        </div>
     )
 }
 

@@ -1,33 +1,23 @@
 .detail-page-buttons {
-    margin-right: 30px;
+    margin: 10px 30px;
 }
 
-.descriptionPost {
-    font-size: 0.3em;
-
-}
-
-.categoriesTitle {
+.categoriesTitle,
+.TitleDetailspage {
     font-weight: bold;
 }
 
 .itemListCat {
-    margin-right: 5px;
-    margin-top: 5px;
-}
-
-.TitleDetailspage {
-    font-weight: bolder;
-
+    margin: 5px;
 }
 
 .PostDetailsPage {
-    background-color: rgb(255, 254, 253);
+    background-color: #fffef5;
 }
 
 .avatarPostDetails {
-    width: 20%;
-    height: 20%;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
 }
 
@@ -38,9 +28,10 @@
 
 .descriptionDetails {
     text-align: justify;
+    padding: 0 15px;
 }
 
 .buttonsPostDetails {
-    padding-bottom: 30px;
+    padding: 30px 0;
 
 }

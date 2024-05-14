@@ -1,36 +1,36 @@
 .ResponseCard {
-    font-size: 1em;
-    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.customCard {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
     padding: 10px;
-    background-color: rgb(41, 34, 34);
-    border-radius: 30%;
+    margin: 10px;
 }
 
-.ownerRespose {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.avatarResponse {
-    width: 100%;
+.avatarCol img {
     border-radius: 50%;
+    width: 50px;
+    height: 50px;
 }
 
-.edit-button-comment {
-    margin-right: 10px;
+.buttonCol {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
 }
 
-.nameAndDateComment {
-    color: white;
+.icon-button {
+    background-color: transparent;
+    color: #007bff;
 }
 
-.brColorSeparator {
-    color: white;
-    height: 10%;
+.icon-button:hover {
+    color: #0056b3;
+    background-color: #f8f9fa;
 }
 
-.commentItself {
-    color: white;
-    padding-top: 20px;
+.editModal .modal-content {
+    border-radius: 15px;
 }
