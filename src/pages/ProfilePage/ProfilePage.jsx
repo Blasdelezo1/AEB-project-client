@@ -1,5 +1,5 @@
 import ProfileCard from '../../components/ProfileCard/ProfileCard'
-import UserFavorites from '../../components/UserFavorites/UserFavorites'
+import UserFavorites from '../../components/UserFavorites/UserFavorites.jsx'
 import './ProfilePage.css'
 import { Container } from "react-bootstrap"
 
